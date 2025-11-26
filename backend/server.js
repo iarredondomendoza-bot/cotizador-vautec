@@ -10,6 +10,10 @@ app.use(cors());
 app.use(express.json({ limit: '10mb' }));
 app.disable('x-powered-by');
 
+// Disable compression - let Railway/Caddy handle it properly
+app.set('etag', false);
+app.set('json spaces', 0);
+
 // Inicializar base de datos
 initDB();
 
