@@ -5,6 +5,13 @@ const { pool, initDB } = require('./database');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware to disable compression
+app.use((req, res, next) => {
+  res.set('Cache-Control', 'no-store');
+  res.set('Content-Encoding', 'identity');
+  next();
+});
+
 // Middleware
 app.use(cors());
 app.use(express.json({ limit: '10mb' }));
