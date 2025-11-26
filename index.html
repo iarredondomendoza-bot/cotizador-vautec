@@ -21,6 +21,169 @@
 <body>
     <div id="root"></div>
 
+    <script>
+        // API Configuration
+        const API_BASE_URL = window.location.hostname === 'localhost' 
+          ? 'http://localhost:3000'
+          : 'https://cotizador-vautec-production.up.railway.app';
+
+        // API Functions
+        const api = {
+          async getClientes() {
+            const response = await fetch(`${API_BASE_URL}/api/clientes`);
+            if (!response.ok) throw new Error('Error al obtener clientes');
+            const data = await response.json();
+            return data.map(c => ({
+              id: c.id,
+              nombre: c.nombre,
+              direccion: c.direccion,
+              atencion: c.atencion,
+              telefono: c.telefono,
+              email: c.email
+            }));
+          },
+
+          async createCliente(cliente) {
+            const response = await fetch(`${API_BASE_URL}/api/clientes`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(cliente)
+            });
+            if (!response.ok) throw new Error('Error al crear cliente');
+            return response.json();
+          },
+
+          async updateCliente(id, cliente) {
+            const response = await fetch(`${API_BASE_URL}/api/clientes/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(cliente)
+            });
+            if (!response.ok) throw new Error('Error al actualizar cliente');
+            return response.json();
+          },
+
+          async deleteCliente(id) {
+            const response = await fetch(`${API_BASE_URL}/api/clientes/${id}`, {
+              method: 'DELETE'
+            });
+            if (!response.ok) throw new Error('Error al eliminar cliente');
+            return response.json();
+          },
+
+          async getCotizaciones() {
+            const response = await fetch(`${API_BASE_URL}/api/cotizaciones`);
+            if (!response.ok) throw new Error('Error al obtener cotizaciones');
+            const data = await response.json();
+            return data.map(c => ({
+              id: c.id,
+              numero: c.numero,
+              revision: c.revision,
+              fecha: c.fecha,
+              clienteId: c.cliente_id,
+              clienteNombre: c.cliente_nombre,
+              clienteDireccion: c.cliente_direccion,
+              clienteAtencion: c.cliente_atencion,
+              clienteTelefono: c.cliente_telefono,
+              clienteEmail: c.cliente_email,
+              proyectoTitulo: c.proyecto_titulo,
+              proyectoSubtitulo: c.proyecto_subtitulo,
+              descripcionParrafo1: c.descripcion_parrafo1,
+              justificacion: c.justificacion,
+              alcances: c.alcances,
+              conceptos: c.conceptos,
+              tiempoEntrega: c.tiempo_entrega,
+              garantiaMeses: c.garantia_meses,
+              incluye: c.incluye,
+              noIncluye: c.no_incluye,
+              anticipo: c.anticipo,
+              pagoFinal: c.pago_final,
+              pagoFinalCondicion: c.pago_final_condicion,
+              terminosCondiciones: c.terminos_condiciones
+            }));
+          },
+
+          async createCotizacion(cotizacion) {
+            const payload = {
+              id: cotizacion.id,
+              numero: cotizacion.numero,
+              revision: cotizacion.revision,
+              fecha: cotizacion.fecha,
+              clienteId: cotizacion.clienteId,
+              clienteNombre: cotizacion.clienteNombre,
+              clienteDireccion: cotizacion.clienteDireccion,
+              clienteAtencion: cotizacion.clienteAtencion,
+              clienteTelefono: cotizacion.clienteTelefono,
+              clienteEmail: cotizacion.clienteEmail,
+              proyectoTitulo: cotizacion.proyectoTitulo,
+              proyectoSubtitulo: cotizacion.proyectoSubtitulo,
+              descripcionParrafo1: cotizacion.descripcionParrafo1,
+              justificacion: cotizacion.justificacion,
+              alcances: cotizacion.alcances,
+              conceptos: cotizacion.conceptos,
+              tiempoEntrega: cotizacion.tiempoEntrega,
+              garantiaMeses: cotizacion.garantiaMeses,
+              incluye: cotizacion.incluye,
+              noIncluye: cotizacion.noIncluye,
+              anticipo: cotizacion.anticipo,
+              pagoFinal: cotizacion.pagoFinal,
+              pagoFinalCondicion: cotizacion.pagoFinalCondicion,
+              terminosCondiciones: cotizacion.terminosCondiciones
+            };
+            const response = await fetch(`${API_BASE_URL}/api/cotizaciones`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('Error al crear cotización');
+            return response.json();
+          },
+
+          async updateCotizacion(id, cotizacion) {
+            const payload = {
+              numero: cotizacion.numero,
+              revision: cotizacion.revision,
+              fecha: cotizacion.fecha,
+              clienteId: cotizacion.clienteId,
+              clienteNombre: cotizacion.clienteNombre,
+              clienteDireccion: cotizacion.clienteDireccion,
+              clienteAtencion: cotizacion.clienteAtencion,
+              clienteTelefono: cotizacion.clienteTelefono,
+              clienteEmail: cotizacion.clienteEmail,
+              proyectoTitulo: cotizacion.proyectoTitulo,
+              proyectoSubtitulo: cotizacion.proyectoSubtitulo,
+              descripcionParrafo1: cotizacion.descripcionParrafo1,
+              justificacion: cotizacion.justificacion,
+              alcances: cotizacion.alcances,
+              conceptos: cotizacion.conceptos,
+              tiempoEntrega: cotizacion.tiempoEntrega,
+              garantiaMeses: cotizacion.garantiaMeses,
+              incluye: cotizacion.incluye,
+              noIncluye: cotizacion.noIncluye,
+              anticipo: cotizacion.anticipo,
+              pagoFinal: cotizacion.pagoFinal,
+              pagoFinalCondicion: cotizacion.pagoFinalCondicion,
+              terminosCondiciones: cotizacion.terminosCondiciones
+            };
+            const response = await fetch(`${API_BASE_URL}/api/cotizaciones/${id}`, {
+              method: 'PUT',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (!response.ok) throw new Error('Error al actualizar cotización');
+            return response.json();
+          },
+
+          async deleteCotizacion(id) {
+            const response = await fetch(`${API_BASE_URL}/api/cotizaciones/${id}`, {
+              method: 'DELETE'
+            });
+            if (!response.ok) throw new Error('Error al eliminar cotización');
+            return response.json();
+          }
+        };
+    </script>
+
     <script type="text/babel">
         const { useState, useEffect } = React;
 
@@ -35,31 +198,23 @@
           
 
           useEffect(() => {
-            const clientesGuardados = localStorage.getItem('vautec_clientes');
-            const cotizacionesGuardadas = localStorage.getItem('vautec_cotizaciones');
-            
-            if (clientesGuardados) {
-              setClientes(JSON.parse(clientesGuardados));
-            }
-            
-            if (cotizacionesGuardadas) {
-              setCotizaciones(JSON.parse(cotizacionesGuardadas));
-            }
-            
-            inicializarCotizacionNueva();
+            const cargarDatos = async () => {
+              try {
+                const [clientesData, cotizacionesData] = await Promise.all([
+                  api.getClientes(),
+                  api.getCotizaciones()
+                ]);
+                setClientes(clientesData);
+                setCotizaciones(cotizacionesData);
+              } catch (error) {
+                console.error('Error al cargar datos:', error);
+              }
+              inicializarCotizacionNueva();
+            };
+            cargarDatos();
           }, []);
 
-          useEffect(() => {
-            if (clientes.length > 0) {
-              localStorage.setItem('vautec_clientes', JSON.stringify(clientes));
-            }
-          }, [clientes]);
 
-          useEffect(() => {
-            if (cotizaciones.length > 0) {
-              localStorage.setItem('vautec_cotizaciones', JSON.stringify(cotizaciones));
-            }
-          }, [cotizaciones]);
 
           const inicializarCotizacionNueva = () => {
             const fecha = new Date();
@@ -251,42 +406,71 @@ La venta de productos y servicios quedará sujeta a los términos y condiciones 
             }));
           };
 
-          const agregarCliente = (nuevoCliente) => {
-            const cliente = {
-              ...nuevoCliente,
-              id: Date.now(),
-              fechaCreacion: new Date().toISOString()
-            };
-            setClientes(prev => [...prev, cliente]);
-          };
-
-          const editarCliente = (clienteActualizado) => {
-            setClientes(prev => prev.map(c => 
-              c.id === clienteActualizado.id ? clienteActualizado : c
-            ));
-            
-            if (cotizacionActual?.clienteId === clienteActualizado.id) {
-              seleccionarCliente(clienteActualizado);
+          const agregarCliente = async (nuevoCliente) => {
+            try {
+              const cliente = {
+                ...nuevoCliente,
+                id: Date.now()
+              };
+              await api.createCliente(cliente);
+              setClientes(prev => [...prev, cliente]);
+              alert('✅ Cliente creado correctamente');
+            } catch (error) {
+              console.error('Error al crear cliente:', error);
+              alert('❌ Error al crear cliente');
             }
           };
 
-          const eliminarCliente = (id) => {
-            setClientes(prev => prev.filter(c => c.id !== id));
+          const editarCliente = async (clienteActualizado) => {
+            try {
+              await api.updateCliente(clienteActualizado.id, clienteActualizado);
+              setClientes(prev => prev.map(c => 
+                c.id === clienteActualizado.id ? clienteActualizado : c
+              ));
+              
+              if (cotizacionActual?.clienteId === clienteActualizado.id) {
+                seleccionarCliente(clienteActualizado);
+              }
+              alert('✅ Cliente actualizado correctamente');
+            } catch (error) {
+              console.error('Error al actualizar cliente:', error);
+              alert('❌ Error al actualizar cliente');
+            }
           };
 
-          const guardarCotizacion = () => {
+          const eliminarCliente = async (id) => {
+            if (confirm('¿Estás seguro de eliminar este cliente?')) {
+              try {
+                await api.deleteCliente(id);
+                setClientes(prev => prev.filter(c => c.id !== id));
+                alert('✅ Cliente eliminado correctamente');
+              } catch (error) {
+                console.error('Error al eliminar cliente:', error);
+                alert('❌ Error al eliminar cliente');
+              }
+            }
+          };
+
+          const guardarCotizacion = async () => {
             if (!cotizacionActual) return;
             
-            const existe = cotizaciones.find(c => c.id === cotizacionActual.id);
-            
-            if (existe) {
-              setCotizaciones(prev => prev.map(c => 
-                c.id === cotizacionActual.id ? { ...cotizacionActual, fechaModificacion: new Date().toISOString() } : c
-              ));
-              alert('✅ Cotización actualizada correctamente');
-            } else {
-              setCotizaciones(prev => [...prev, cotizacionActual]);
-              alert('✅ Cotización guardada correctamente');
+            try {
+              const existe = cotizaciones.find(c => c.id === cotizacionActual.id);
+              
+              if (existe) {
+                await api.updateCotizacion(cotizacionActual.id, cotizacionActual);
+                setCotizaciones(prev => prev.map(c => 
+                  c.id === cotizacionActual.id ? { ...cotizacionActual } : c
+                ));
+                alert('✅ Cotización actualizada correctamente');
+              } else {
+                await api.createCotizacion(cotizacionActual);
+                setCotizaciones(prev => [...prev, cotizacionActual]);
+                alert('✅ Cotización guardada correctamente');
+              }
+            } catch (error) {
+              console.error('Error al guardar cotización:', error);
+              alert('❌ Error al guardar cotización');
             }
           };
 
@@ -295,9 +479,16 @@ La venta de productos y servicios quedará sujeta a los términos y condiciones 
             setShowCotizacionesModal(false);
           };
 
-          const eliminarCotizacion = (id) => {
+          const eliminarCotizacion = async (id) => {
             if (confirm('¿Estás seguro de eliminar esta cotización?')) {
-              setCotizaciones(prev => prev.filter(c => c.id !== id));
+              try {
+                await api.deleteCotizacion(id);
+                setCotizaciones(prev => prev.filter(c => c.id !== id));
+                alert('✅ Cotización eliminada correctamente');
+              } catch (error) {
+                console.error('Error al eliminar cotización:', error);
+                alert('❌ Error al eliminar cotización');
+              }
             }
           };
 
