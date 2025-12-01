@@ -19,6 +19,8 @@ const initDB = async () => {
         atencion VARCHAR(255),
         telefono VARCHAR(50),
         email VARCHAR(255),
+        contactos JSONB DEFAULT '[]',
+        emails JSONB DEFAULT '[]',
         fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         fecha_modificacion TIMESTAMP
       );

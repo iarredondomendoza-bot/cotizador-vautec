@@ -44,13 +44,13 @@ app.get('/api/clientes', async (req, res) => {
 
 // Crear cliente
 app.post('/api/clientes', async (req, res) => {
-  const { id, nombre, direccion, atencion, telefono, email } = req.body;
+  const { id, nombre, direccion, atencion, telefono, email, contactos, emails } = req.body;
   try {
     const result = await pool.query(
-      `INSERT INTO clientes (id, nombre, direccion, atencion, telefono, email, fecha_modificacion)
-       VALUES ($1, $2, $3, $4, $5, $6, NOW())
+      `INSERT INTO clientes (id, nombre, direccion, atencion, telefono, email, contactos, emails, fecha_modificacion)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, NOW())
        RETURNING *`,
-      [id, nombre, direccion, atencion, telefono, email]
+      [id, nombre, direccion, atencion, telefono, email, JSON.stringify(contactos || []), JSON.stringify(emails || [])]
     );
     res.status(201).json(result.rows[0]);
   } catch (error) {
@@ -62,14 +62,14 @@ app.post('/api/clientes', async (req, res) => {
 // Actualizar cliente
 app.put('/api/clientes/:id', async (req, res) => {
   const { id } = req.params;
-  const { nombre, direccion, atencion, telefono, email } = req.body;
+  const { nombre, direccion, atencion, telefono, email, contactos, emails } = req.body;
   try {
     const result = await pool.query(
       `UPDATE clientes 
-       SET nombre = $2, direccion = $3, atencion = $4, telefono = $5, email = $6, fecha_modificacion = NOW()
+       SET nombre = $2, direccion = $3, atencion = $4, telefono = $5, email = $6, contactos = $7, emails = $8, fecha_modificacion = NOW()
        WHERE id = $1
        RETURNING *`,
-      [id, nombre, direccion, atencion, telefono, email]
+      [id, nombre, direccion, atencion, telefono, email, JSON.stringify(contactos || []), JSON.stringify(emails || [])]
     );
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Cliente no encontrado' });

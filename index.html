@@ -39,7 +39,9 @@
               direccion: c.direccion,
               atencion: c.atencion,
               telefono: c.telefono,
-              email: c.email
+              email: c.email,
+              contactos: c.contactos || [],
+              emails: c.emails || []
             }));
           },
 
@@ -1633,9 +1635,47 @@ www.vautec-mx.com
             direccion: '',
             atencion: '',
             telefono: '',
-            email: ''
+            email: '',
+            contactos: [],
+            emails: []
           });
           const [mostrarFormulario, setMostrarFormulario] = useState(false);
+          const [nuevoContacto, setNuevoContacto] = useState('');
+          const [nuevoEmail, setNuevoEmail] = useState('');
+
+          const agregarContacto = () => {
+            if (nuevoContacto.trim()) {
+              setNuevoCliente({
+                ...nuevoCliente,
+                contactos: [...nuevoCliente.contactos, nuevoContacto.trim()]
+              });
+              setNuevoContacto('');
+            }
+          };
+
+          const eliminarContacto = (index) => {
+            setNuevoCliente({
+              ...nuevoCliente,
+              contactos: nuevoCliente.contactos.filter((_, i) => i !== index)
+            });
+          };
+
+          const agregarEmail = () => {
+            if (nuevoEmail.trim() && nuevoEmail.includes('@')) {
+              setNuevoCliente({
+                ...nuevoCliente,
+                emails: [...nuevoCliente.emails, nuevoEmail.trim()]
+              });
+              setNuevoEmail('');
+            }
+          };
+
+          const eliminarEmail = (index) => {
+            setNuevoCliente({
+              ...nuevoCliente,
+              emails: nuevoCliente.emails.filter((_, i) => i !== index)
+            });
+          };
 
           const handleSubmit = (e) => {
             e.preventDefault();
@@ -1645,7 +1685,7 @@ www.vautec-mx.com
             } else {
               onAgregar(nuevoCliente);
             }
-            setNuevoCliente({ nombre: '', direccion: '', atencion: '', telefono: '', email: '' });
+            setNuevoCliente({ nombre: '', direccion: '', atencion: '', telefono: '', email: '', contactos: [], emails: [] });
             setMostrarFormulario(false);
           };
 
@@ -1656,7 +1696,9 @@ www.vautec-mx.com
               direccion: cliente.direccion,
               atencion: cliente.atencion,
               telefono: cliente.telefono,
-              email: cliente.email
+              email: cliente.email,
+              contactos: cliente.contactos || [],
+              emails: cliente.emails || []
             });
             setMostrarFormulario(true);
           };
@@ -1674,13 +1716,14 @@ www.vautec-mx.com
                       setMostrarFormulario(!mostrarFormulario);
                       if (!mostrarFormulario) {
                         setClienteEditando(null);
-                        setNuevoCliente({ nombre: '', direccion: '', atencion: '', telefono: '', email: '' });
+                        setNuevoCliente({ nombre: '', direccion: '', atencion: '', telefono: '', email: '', contactos: [], emails: [] });
                       }
                     },
                     className: "mb-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
                   }, mostrarFormulario ? '❌ Cancelar' : '➕ Agregar Nuevo Cliente'),
                   mostrarFormulario && React.createElement('form', { onSubmit: handleSubmit, className: "mb-6 p-4 bg-gray-50 rounded-lg space-y-3" },
-                    React.createElement('h3', { className: "font-bold text-lg" }, clienteEditando ? 'Editar Cliente' : 'Nuevo Cliente'),
+                    React.createElement('h3', { className: "font-bold text-lg mb-4" }, clienteEditando ? 'Editar Cliente' : 'Nuevo Cliente'),
+                    
                     React.createElement('input', {
                       type: "text",
                       placeholder: "Nombre del Cliente *",
@@ -1689,6 +1732,7 @@ www.vautec-mx.com
                       required: true,
                       className: "w-full px-4 py-2 border rounded-lg"
                     }),
+                    
                     React.createElement('input', {
                       type: "text",
                       placeholder: "Dirección *",
@@ -1697,13 +1741,15 @@ www.vautec-mx.com
                       required: true,
                       className: "w-full px-4 py-2 border rounded-lg"
                     }),
+                    
                     React.createElement('input', {
                       type: "text",
-                      placeholder: "Atención",
+                      placeholder: "Atención (Principal)",
                       value: nuevoCliente.atencion,
                       onChange: (e) => setNuevoCliente({...nuevoCliente, atencion: e.target.value}),
                       className: "w-full px-4 py-2 border rounded-lg"
                     }),
+                    
                     React.createElement('input', {
                       type: "text",
                       placeholder: "Teléfono",
@@ -1711,14 +1757,80 @@ www.vautec-mx.com
                       onChange: (e) => setNuevoCliente({...nuevoCliente, telefono: e.target.value}),
                       className: "w-full px-4 py-2 border rounded-lg"
                     }),
+                    
                     React.createElement('input', {
                       type: "email",
-                      placeholder: "Email",
+                      placeholder: "Email (Principal)",
                       value: nuevoCliente.email,
                       onChange: (e) => setNuevoCliente({...nuevoCliente, email: e.target.value}),
                       className: "w-full px-4 py-2 border rounded-lg"
                     }),
-                    React.createElement('button', { type: "submit", className: "w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700" },
+
+                    // Contactos adicionales
+                    React.createElement('div', { className: "border-t pt-3 mt-4" },
+                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, '👥 Contactos Adicionales'),
+                      React.createElement('div', { className: "flex gap-2 mb-2" },
+                        React.createElement('input', {
+                          type: "text",
+                          placeholder: "Nombre del contacto",
+                          value: nuevoContacto,
+                          onChange: (e) => setNuevoContacto(e.target.value),
+                          onKeyPress: (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarContacto(); } },
+                          className: "flex-1 px-4 py-2 border rounded-lg"
+                        }),
+                        React.createElement('button', {
+                          type: "button",
+                          onClick: agregarContacto,
+                          className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                        }, '+ Agregar')
+                      ),
+                      nuevoCliente.contactos.length > 0 && React.createElement('div', { className: "space-y-1" },
+                        nuevoCliente.contactos.map((contacto, idx) =>
+                          React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
+                            React.createElement('span', { className: "text-sm" }, '👤 ', contacto),
+                            React.createElement('button', {
+                              type: "button",
+                              onClick: () => eliminarContacto(idx),
+                              className: "text-red-500 hover:text-red-700 text-sm"
+                            }, '✕')
+                          )
+                        )
+                      )
+                    ),
+
+                    // Emails adicionales
+                    React.createElement('div', { className: "border-t pt-3 mt-4" },
+                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, '📧 Emails Adicionales'),
+                      React.createElement('div', { className: "flex gap-2 mb-2" },
+                        React.createElement('input', {
+                          type: "email",
+                          placeholder: "correo@ejemplo.com",
+                          value: nuevoEmail,
+                          onChange: (e) => setNuevoEmail(e.target.value),
+                          onKeyPress: (e) => { if (e.key === 'Enter') { e.preventDefault(); agregarEmail(); } },
+                          className: "flex-1 px-4 py-2 border rounded-lg"
+                        }),
+                        React.createElement('button', {
+                          type: "button",
+                          onClick: agregarEmail,
+                          className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                        }, '+ Agregar')
+                      ),
+                      nuevoCliente.emails.length > 0 && React.createElement('div', { className: "space-y-1" },
+                        nuevoCliente.emails.map((email, idx) =>
+                          React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
+                            React.createElement('span', { className: "text-sm" }, '✉️ ', email),
+                            React.createElement('button', {
+                              type: "button",
+                              onClick: () => eliminarEmail(idx),
+                              className: "text-red-500 hover:text-red-700 text-sm"
+                            }, '✕')
+                          )
+                        )
+                      )
+                    ),
+                    
+                    React.createElement('button', { type: "submit", className: "w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-4" },
                       clienteEditando ? '💾 Actualizar Cliente' : '➕ Agregar Cliente'
                     )
                   ),
@@ -1733,7 +1845,23 @@ www.vautec-mx.com
                                 React.createElement('p', { className: "text-sm text-gray-600" }, '📍 ', cliente.direccion),
                                 cliente.atencion && React.createElement('p', { className: "text-sm text-gray-600" }, '👤 ', cliente.atencion),
                                 cliente.telefono && React.createElement('p', { className: "text-sm text-gray-600" }, '📞 ', cliente.telefono),
-                                cliente.email && React.createElement('p', { className: "text-sm text-gray-600" }, '✉️ ', cliente.email)
+                                cliente.email && React.createElement('p', { className: "text-sm text-gray-600" }, '✉️ ', cliente.email),
+                                
+                                // Contactos adicionales
+                                cliente.contactos && cliente.contactos.length > 0 && React.createElement('div', { className: "mt-2 pt-2 border-t" },
+                                  React.createElement('p', { className: "text-xs font-semibold text-gray-500 mb-1" }, 'Contactos Adicionales:'),
+                                  cliente.contactos.map((contacto, idx) =>
+                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, '👤 ', contacto)
+                                  )
+                                ),
+                                
+                                // Emails adicionales
+                                cliente.emails && cliente.emails.length > 0 && React.createElement('div', { className: "mt-2 pt-2 border-t" },
+                                  React.createElement('p', { className: "text-xs font-semibold text-gray-500 mb-1" }, 'Emails Adicionales:'),
+                                  cliente.emails.map((email, idx) =>
+                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, '✉️ ', email)
+                                  )
+                                )
                               ),
                               React.createElement('div', { className: "flex gap-2" },
                                 React.createElement('button', {
