@@ -229,7 +229,7 @@
             const dia = String(fecha.getDate()).padStart(2, '0');
             const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
             const mes = meses[fecha.getMonth()];
-            const aÃ±o = String(fecha.getFullYear()).slice(-2);
+            const año = String(fecha.getFullYear()).slice(-2);
             
             const numeroGenerado = await generarNumeroCotizacion();
             
@@ -237,7 +237,7 @@
               id: Date.now(),
               numero: numeroGenerado,
               revision: '1.0',
-              fecha: `${dia}-${mes}-${aÃ±o}`,
+              fecha: `${dia}-${mes}-${año}`,
               clienteId: null,
               clienteNombre: '',
               clienteDireccion: '',
@@ -254,7 +254,7 @@
                 {item: 'DocumentaciÃ³n tÃ©cnica', incluido: true},
                 {item: 'Soporte tÃ©cnico durante implementaciÃ³n', incluido: true},
                 {item: 'Pruebas y validaciÃ³n', incluido: true},
-                {item: 'Modificaciones mecÃ¡nicas', incluido: false},
+                {item: 'Modificaciones mecánicas', incluido: false},
                 {item: 'Compra de hardware nuevo', incluido: false},
                 {item: 'Mantenimiento posterior', incluido: false}
               ],
@@ -279,7 +279,7 @@
               ],
               noIncluye: [
                 'Muestras fÃ­sicas (deben ser proporcionadas por el cliente).',
-                'Modificaciones fÃ­sicas o mecÃ¡nicas en equipos.',
+                'Modificaciones fÃ­sicas o mecánicas en equipos.',
                 'Ajustes al sistema de iluminaciÃ³n si se requieren.'
               ],
               anticipo: '50',
