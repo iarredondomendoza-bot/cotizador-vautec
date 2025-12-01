@@ -1,9 +1,15 @@
 const express = require('express');
 const cors = require('cors');
 const { pool, initDB } = require('./database');
+const OpenAI = require('openai');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Inicializar OpenAI si hay API key
+const openai = process.env.OPENAI_API_KEY ? new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY
+}) : null;
 
 // Middleware to disable compression
 app.use((req, res, next) => {
@@ -251,6 +257,59 @@ app.post('/api/migrate', async (req, res) => {
     res.status(500).json({ error: 'Error al migrar datos' });
   } finally {
     client.release();
+  }
+});
+
+// ========== IA ==========
+
+app.post('/api/generar-proyecto-completo', async (req, res) => {
+  const { descripcion } = req.body;
+  
+  if (!openai) {
+    return res.status(503).json({ 
+      error: 'OpenAI no configurado' 
+    });
+  }
+  
+  try {
+    const prompt = `${descripcion}
+
+Responde SOLO con un JSON válido con esta estructura:
+{
+  "titulo": "TÍTULO EN MAYÚSCULAS",
+  "subtitulo": "Subtítulo descriptivo",
+  "descripcion": "Descripción técnica detallada del proyecto",
+  "justificacion": "Justificación técnica y económica del proyecto",
+  "alcances": [
+    {"item": "Descripción del alcance", "incluido": true},
+    {"item": "Otro alcance", "incluido": false}
+  ]
+}`;
+
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: "Eres un experto en automatización industrial. Respondes SOLO en formato JSON válido." },
+        { role: "user", content: prompt }
+      ],
+      temperature: 0.7,
+      max_tokens: 4000
+    });
+
+    let respuesta = completion.choices[0].message.content.trim();
+    
+    // Limpiar markdown
+    if (respuesta.startsWith('```json')) {
+      respuesta = respuesta.replace(/```json\n?/g, '').replace(/```\n?/g, '');
+    } else if (respuesta.startsWith('```')) {
+      respuesta = respuesta.replace(/```\n?/g, '');
+    }
+    
+    const resultado = JSON.parse(respuesta);
+    res.json(resultado);
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: error.message });
   }
 });
 
