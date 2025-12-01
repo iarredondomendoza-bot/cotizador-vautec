@@ -258,6 +258,7 @@
                 {item: 'Compra de hardware nuevo', incluido: false},
                 {item: 'Mantenimiento posterior', incluido: false}
               ],
+              moneda: 'USD',
               conceptos: [
                 {
                   descripcion: 'Optimización del sistema de visión',
@@ -469,12 +470,18 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
           };
 
           const calcularSubtotalConcepto = (concepto) => {
-            const precio = parseFloat(concepto.precioUnitario.replace(',', '')) || 0;
+            const precio = parseFloat(concepto.precioUnitario.replace(/,/g, '')) || 0;
             const cant = parseFloat(concepto.cantidad) || 0;
             const desc = parseFloat(concepto.descuento) || 0;
             const importe = precio * cant;
             const subtotal = importe - (importe * desc / 100);
             return subtotal.toFixed(2);
+          };
+
+          const formatearNumero = (numero) => {
+            const num = parseFloat(numero);
+            if (isNaN(num)) return '0.00';
+            return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
           };
 
           const calcularTotalGeneral = () => {
@@ -738,7 +745,7 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
             // Generar tabla de conceptos para el PDF
             const conceptosHTML = cotizacionActual.conceptos.map((concepto, idx) => {
               const subtotal = calcularSubtotalConcepto(concepto);
-              const importe = (parseFloat(concepto.precioUnitario.replace(',', '')) * parseFloat(concepto.cantidad)).toFixed(2);
+              const importe = (parseFloat(concepto.precioUnitario.replace(/,/g, '')) * parseFloat(concepto.cantidad)).toFixed(2);
               // Escapar saltos de línea en detalle
               const detalleEscapado = concepto.detalle ? concepto.detalle.replace(/\n/g, '<br>') : '';
               return `
@@ -747,11 +754,11 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
                     <strong>${concepto.descripcion}</strong>
                     ${detalleEscapado ? `<br><span style="font-size: 10px; color: #666;">${detalleEscapado}</span>` : ''}
                   </td>
-                  <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${concepto.precioUnitario} USD</td>
+                  <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${formatearNumero(concepto.precioUnitario.replace(/,/g, ''))} ${cotizacionActual.moneda}</td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">${concepto.cantidad}</td>
-                  <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${importe} USD</td>
+                  <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${formatearNumero(importe)} ${cotizacionActual.moneda}</td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">${concepto.descuento}%</td>
-                  <td style="text-align: center; padding: 8px; border: 1px solid #000; font-weight: bold;">$${subtotal} USD</td>
+                  <td style="text-align: center; padding: 8px; border: 1px solid #000; font-weight: bold;">$${formatearNumero(subtotal)} ${cotizacionActual.moneda}</td>
                 </tr>
               `;
             }).join('');
@@ -878,7 +885,7 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
             ${conceptosHTML}
             <tr class="total-row">
                 <td colspan="5" style="text-align: right; padding-right: 10px;">TOTAL:</td>
-        <td style="text-align: center;">$${totalGeneral} USD</td>
+        <td style="text-align: center;">${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
       </tr>
       <tr>
         <td colspan="6" style="text-align: right; color: #c62828; font-size: 13px; font-style: italic; padding-top: 8px; border: none;">Los costos no incluyen IVA</td>
@@ -1079,7 +1086,7 @@ ${cotizacionActual.terminosCondiciones}
             ${conceptosHTML}
             <tr class="total-row">
                 <td colspan="5" style="text-align: right; padding-right: 10px;">TOTAL:</td>
-        <td style="text-align: center;">$${totalGeneral} USD</td>
+        <td style="text-align: center;">${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
       </tr>
       <tr>
         <td colspan="6" style="text-align: right; color: #c62828; font-size: 13px; font-style: italic; padding-top: 8px; border: none;">Los costos no incluyen IVA</td>
@@ -1157,7 +1164,7 @@ Número de Cotización: ${cotizacionActual.numero}
 Cliente: ${cotizacionActual.clienteNombre}
 Proyecto: ${cotizacionActual.proyectoTitulo}
 Fecha: ${cotizacionActual.fecha}
-Total: $${totalGeneral} USD
+Total: ${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}
 
 Este paquete contiene la cotización en formato HTML.
 Puede abrir el archivo HTML en cualquier navegador web.
@@ -1489,6 +1496,19 @@ www.vautec-mx.com
                       activeTab === 'costos' && React.createElement('div', { className: "space-y-4" },
                         React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'Conceptos y Costos'),
                         
+                        // Selector de moneda
+                        React.createElement('div', { className: "bg-blue-50 p-4 rounded-lg border border-blue-200 mb-4" },
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-2" }, 'Moneda:'),
+                          React.createElement('select', {
+                            value: cotizacionActual.moneda,
+                            onChange: (e) => handleChange('moneda', e.target.value),
+                            className: "px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 bg-white"
+                          },
+                            React.createElement('option', { value: "USD" }, 'USD - Dólares Estadounidenses'),
+                            React.createElement('option', { value: "MXN" }, 'MXN - Pesos Mexicanos')
+                          )
+                        ),
+                        
                         // Lista de conceptos
                         React.createElement('div', { className: "space-y-4" },
                           cotizacionActual.conceptos.map((concepto, index) =>
@@ -1523,7 +1543,7 @@ www.vautec-mx.com
                                 ),
                                 React.createElement('div', { className: "grid grid-cols-2 gap-3" },
                                   React.createElement('div', null,
-                                    React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Precio Unitario (USD)'),
+                                    React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, `Precio Unitario (${cotizacionActual.moneda})`),
                                     React.createElement('input', {
                                       type: "text",
                                       value: concepto.precioUnitario,
@@ -1554,7 +1574,7 @@ www.vautec-mx.com
                                   React.createElement('div', null,
                                     React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Subtotal'),
                                     React.createElement('div', { className: "px-4 py-2 bg-green-50 border border-green-300 rounded-lg font-bold text-green-700" },
-                                      `$${calcularSubtotalConcepto(concepto)} USD`
+                                      `$${formatearNumero(calcularSubtotalConcepto(concepto))} ${cotizacionActual.moneda}`
                                     )
                                   )
                                 )
@@ -1570,7 +1590,7 @@ www.vautec-mx.com
                         
                         React.createElement('div', { className: "bg-green-50 p-4 rounded-lg border-2 border-green-600 mt-4" },
                           React.createElement('p', { className: "text-sm font-medium text-gray-700 mb-2" }, 'Total General:'),
-                          React.createElement('p', { className: "text-3xl font-bold text-green-700" }, `$${calcularTotalGeneral()} USD`)
+                          React.createElement('p', { className: "text-3xl font-bold text-green-700" }, `$${formatearNumero(calcularTotalGeneral())} ${cotizacionActual.moneda}`)
                         ),
                         
                         React.createElement('div', { className: "mt-6" },
@@ -2499,3 +2519,4 @@ www.vautec-mx.com
     </script>
 </body>
 </html>
+
