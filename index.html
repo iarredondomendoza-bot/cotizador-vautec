@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -137,7 +137,7 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
             });
-            if (!response.ok) throw new Error('Error al crear cotizaciÃ³n');
+            if (!response.ok) throw new Error('Error al crear cotización');
             return response.json();
           },
 
@@ -172,7 +172,7 @@
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
             });
-            if (!response.ok) throw new Error('Error al actualizar cotizaciÃ³n');
+            if (!response.ok) throw new Error('Error al actualizar cotización');
             return response.json();
           },
 
@@ -180,7 +180,7 @@
             const response = await fetch(`${API_BASE_URL}/api/cotizaciones/${id}`, {
               method: 'DELETE'
             });
-            if (!response.ok) throw new Error('Error al eliminar cotizaciÃ³n');
+            if (!response.ok) throw new Error('Error al eliminar cotización');
             return response.json();
           }
         };
@@ -244,24 +244,24 @@
               clienteAtencion: '',
               clienteTelefono: '',
               clienteEmail: '',
-              proyectoTitulo: 'OPTIMIZACIÃ“N DEL SISTEMA DE VISIÃ“N KEYENCE CV-X450',
+              proyectoTitulo: 'OPTIMIZACIÓN DEL SISTEMA DE VISIÓN KEYENCE CV-X450',
               proyectoSubtitulo: 'PARA RECONOCIMIENTO DE RINES AUTOMOTRICES',
-              descripcionParrafo1: 'Esta propuesta tiene como objetivo presentar una soluciÃ³n tÃ©cnica integral para la optimizaciÃ³n del sistema de visiÃ³n industrial.',
-              justificacion: 'El presente proyecto se justifica por la necesidad de mejorar la eficiencia y precisiÃ³n en los procesos de inspecciÃ³n visual.',
+              descripcionParrafo1: 'Esta propuesta tiene como objetivo presentar una solución técnica integral para la optimización del sistema de visión industrial.',
+              justificacion: 'El presente proyecto se justifica por la necesidad de mejorar la eficiencia y precisión en los procesos de inspección visual.',
               alcances: [
-                {item: 'ConfiguraciÃ³n del sistema de visiÃ³n', incluido: true},
-                {item: 'CapacitaciÃ³n al personal', incluido: true},
-                {item: 'DocumentaciÃ³n tÃ©cnica', incluido: true},
-                {item: 'Soporte tÃ©cnico durante implementaciÃ³n', incluido: true},
-                {item: 'Pruebas y validaciÃ³n', incluido: true},
+                {item: 'Configuración del sistema de visión', incluido: true},
+                {item: 'Capacitación al personal', incluido: true},
+                {item: 'Documentación técnica', incluido: true},
+                {item: 'Soporte técnico durante implementación', incluido: true},
+                {item: 'Pruebas y validación', incluido: true},
                 {item: 'Modificaciones mecánicas', incluido: false},
                 {item: 'Compra de hardware nuevo', incluido: false},
                 {item: 'Mantenimiento posterior', incluido: false}
               ],
               conceptos: [
                 {
-                  descripcion: 'OptimizaciÃ³n del sistema de visiÃ³n',
-                  detalle: 'ConfiguraciÃ³n, pruebas y puesta en marcha del sistema',
+                  descripcion: 'Optimización del sistema de visión',
+                  detalle: 'Configuración, pruebas y puesta en marcha del sistema',
                   precioUnitario: '2850.00',
                   cantidad: '1',
                   descuento: '0.00'
@@ -270,44 +270,44 @@
               tiempoEntrega: '1 a 2 semanas a partir de recibir orden de compra',
               garantiaMeses: '3',
               incluye: [
-                'GarantÃ­a de 3 meses sobre la configuraciÃ³n implementada.',
-                'Recaptura de imÃ¡genes, configuraciÃ³n, pruebas y puesta en marcha.',
-                'Respaldos pre y post implementaciÃ³n.',
-                'DocumentaciÃ³n tÃ©cnica completa y manual actualizado.',
-                'Soporte tÃ©cnico especializado durante implementaciÃ³n.',
-                'CapacitaciÃ³n al personal de mantenimiento.'
+                'Garantía de 3 meses sobre la configuración implementada.',
+                'Recaptura de imágenes, configuración, pruebas y puesta en marcha.',
+                'Respaldos pre y post implementación.',
+                'Documentación técnica completa y manual actualizado.',
+                'Soporte técnico especializado durante implementación.',
+                'Capacitación al personal de mantenimiento.'
               ],
               noIncluye: [
-                'Muestras fÃ­sicas (deben ser proporcionadas por el cliente).',
-                'Modificaciones fÃ­sicas o mecánicas en equipos.',
-                'Ajustes al sistema de iluminaciÃ³n si se requieren.'
+                'Muestras físicas (deben ser proporcionadas por el cliente).',
+                'Modificaciones físicas o mecánicas en equipos.',
+                'Ajustes al sistema de iluminación si se requieren.'
               ],
               anticipo: '50',
               pagoFinal: '50',
-              pagoFinalCondicion: 'validaciÃ³n exitosa del sistema',
+              pagoFinalCondicion: 'validación exitosa del sistema',
               terminosCondiciones: `c) Condiciones de venta:
 
-La venta de productos y servicios quedarÃ¡ sujeta a los tÃ©rminos y condiciones de venta establecidos por VAUTEC y forman parte integral de su oferta.
+La venta de productos y servicios quedará sujeta a los términos y condiciones de venta establecidos por VAUTEC y forman parte integral de su oferta.
 
 1.- OBJETO.- VAUTEC se obliga a vender los productos, la maquinaria y/o a prestar los servicios descritos en el apartado II del presente documento a favor de EL CLIENTE.
 
-2.- PRECIO.- El precio serÃ¡ el seÃ±alado en el apartado III del presente documento y estÃ¡ sujeto a lo explÃ­citamente descrito en el apartado II. Si hubiere adiciones o modificaciones en los productos, maquinaria y/o servicios, el precio deberÃ¡ reflejar el ajuste respectivo.
+2.- PRECIO.- El precio será el señalado en el apartado III del presente documento y está sujeto a lo explícitamente descrito en el apartado II. Si hubiere adiciones o modificaciones en los productos, maquinaria y/o servicios, el precio deberá reflejar el ajuste respectivo.
 
-3.- ORDEN DE COMPRA.- EL CLIENTE deberÃ¡ emitir una orden de compra que concuerde con la maquinaria, los productos y/o servicios que se relacionan en el presente documento.
+3.- ORDEN DE COMPRA.- EL CLIENTE deberá emitir una orden de compra que concuerde con la maquinaria, los productos y/o servicios que se relacionan en el presente documento.
 
-4.- ACEPTACIÃ“N DE PEDIDOS.- Para que se considere aceptado el pedido, VAUTEC deberÃ¡ contar con la orden de compra respectiva y/o anticipo por parte de EL CLIENTE.
+4.- ACEPTACIÓN DE PEDIDOS.- Para que se considere aceptado el pedido, VAUTEC deberá contar con la orden de compra respectiva y/o anticipo por parte de EL CLIENTE.
 
-5.- FORMA DE PAGO.- Se requerirÃ¡ un anticipo por el monto indicado en este documento al colocarse el pedido. Los pagos restantes se pagarÃ¡n segÃºn los tÃ©rminos establecidos en la cotizaciÃ³n.
+5.- FORMA DE PAGO.- Se requerirá un anticipo por el monto indicado en este documento al colocarse el pedido. Los pagos restantes se pagarán según los términos establecidos en la cotización.
 
-6.- TIEMPOS DE ENTREGA.- Los tiempos de entrega estipulados se contarÃ¡n a partir de la fecha en que VAUTEC reciba confirmaciÃ³n mediante Orden de Compra y/o anticipo(s).
+6.- TIEMPOS DE ENTREGA.- Los tiempos de entrega estipulados se contarán a partir de la fecha en que VAUTEC reciba confirmación mediante Orden de Compra y/o anticipo(s).
 
-7.- CANCELACIÃ“N DE PEDIDOS.- En caso de cancelar el pedido, EL CLIENTE se compromete a pagar a VAUTEC los costos y gastos incurridos segÃºn el avance de la orden de compra mÃ¡s un 30% del valor total del pedido.
+7.- CANCELACIÓN DE PEDIDOS.- En caso de cancelar el pedido, EL CLIENTE se compromete a pagar a VAUTEC los costos y gastos incurridos según el avance de la orden de compra más un 30% del valor total del pedido.
 
-8.- GARANTÃAS.- VAUTEC garantiza que el diseÃ±o, construcciÃ³n y materiales de sus productos son de primera calidad y estÃ¡n libres de defectos. La responsabilidad se limita al perÃ­odo especificado en la cotizaciÃ³n.
+8.- GARANTÍAS.- VAUTEC garantiza que el diseño, construcción y materiales de sus productos son de primera calidad y están libres de defectos. La responsabilidad se limita al período especificado en la cotización.
 
-9.- CONFIDENCIALIDAD.- VAUTEC se obliga a mantener en estricta confidencialidad toda la informaciÃ³n a la que tenga acceso relacionada con las actividades del cliente.
+9.- CONFIDENCIALIDAD.- VAUTEC se obliga a mantener en estricta confidencialidad toda la información a la que tenga acceso relacionada con las actividades del cliente.
 
-10.- JURISDICCIÃ“N Y COMPETENCIA.- Las partes se someten a la jurisdicciÃ³n y competencia de las leyes y tribunales de Santiago de QuerÃ©taro, Qro.`,
+10.- JURISDICCIÓN Y COMPETENCIA.- Las partes se someten a la jurisdicción y competencia de las leyes y tribunales de Santiago de Querétaro, Qro.`,
               fechaCreacion: new Date().toISOString()
             };
             
@@ -315,9 +315,9 @@ La venta de productos y servicios quedarÃ¡ sujeta a los tÃ©rminos y condicio
           };
 
           const generarNumeroCotizacion = async () => {
-            const aÃ±o = new Date().getFullYear().toString().slice(-2);
+            const año = new Date().getFullYear().toString().slice(-2);
             const mes = String(new Date().getMonth() + 1).padStart(2, '0');
-            const mesActual = `${aÃ±o}${mes}`;
+            const mesActual = `${año}${mes}`;
             
             try {
               // Obtener todas las cotizaciones del mes desde el servidor
@@ -330,7 +330,7 @@ La venta de productos y servicios quedarÃ¡ sujeta a los tÃ©rminos y condicio
               const consecutivo = String(cotizacionesDelMes.length + 1).padStart(2, '0');
               return `VAUTEC-${mesActual}-${consecutivo}`;
             } catch (error) {
-              console.error('Error al generar nÃºmero:', error);
+              console.error('Error al generar número:', error);
               // Fallback: usar timestamp
               const timestamp = Date.now().toString().slice(-4);
               return `VAUTEC-${mesActual}-${timestamp}`;
@@ -381,12 +381,12 @@ La venta de productos y servicios quedarÃ¡ sujeta a los tÃ©rminos y condicio
               const promptCompleto = `Contenido actual:
 ${contenidoActual}
 
-Instrucciones de modificaciÃ³n:
+Instrucciones de modificación:
 ${prompt}
 
-Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JSON:
+Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON:
 {
-  "contenido": "contenido modificado aquÃ­"
+  "contenido": "contenido modificado aquí"
 }`;
 
               const response = await fetch(`${API_BASE_URL}/api/generar-proyecto-completo`, {
@@ -459,7 +459,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
 
           const removeConcepto = (index) => {
             if (cotizacionActual.conceptos.length <= 1) {
-              alert('Debe haber al menos un concepto en la cotizaciÃ³n');
+              alert('Debe haber al menos un concepto en la cotización');
               return;
             }
             setCotizacionActual(prev => ({
@@ -505,10 +505,10 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
               };
               await api.createCliente(cliente);
               setClientes(prev => [...prev, cliente]);
-              alert('âœ… Cliente creado correctamente');
+              alert('✅ Cliente creado correctamente');
             } catch (error) {
               console.error('Error al crear cliente:', error);
-              alert('âŒ Error al crear cliente');
+              alert('❌ Error al crear cliente');
             }
           };
 
@@ -522,22 +522,22 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
               if (cotizacionActual?.clienteId === clienteActualizado.id) {
                 seleccionarCliente(clienteActualizado);
               }
-              alert('âœ… Cliente actualizado correctamente');
+              alert('✅ Cliente actualizado correctamente');
             } catch (error) {
               console.error('Error al actualizar cliente:', error);
-              alert('âŒ Error al actualizar cliente');
+              alert('❌ Error al actualizar cliente');
             }
           };
 
           const eliminarCliente = async (id) => {
-            if (confirm('Â¿EstÃ¡s seguro de eliminar este cliente?')) {
+            if (confirm('¿Estás seguro de eliminar este cliente?')) {
               try {
                 await api.deleteCliente(id);
                 setClientes(prev => prev.filter(c => c.id !== id));
-                alert('âœ… Cliente eliminado correctamente');
+                alert('✅ Cliente eliminado correctamente');
               } catch (error) {
                 console.error('Error al eliminar cliente:', error);
-                alert('âŒ Error al eliminar cliente');
+                alert('❌ Error al eliminar cliente');
               }
             }
           };
@@ -553,32 +553,32 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
                 setCotizaciones(prev => prev.map(c => 
                   c.id === cotizacionActual.id ? { ...cotizacionActual } : c
                 ));
-                alert('âœ… CotizaciÃ³n actualizada correctamente');
+                alert('✅ Cotización actualizada correctamente');
               } else {
                 await api.createCotizacion(cotizacionActual);
                 setCotizaciones(prev => [...prev, cotizacionActual]);
-                alert('âœ… CotizaciÃ³n guardada correctamente');
+                alert('✅ Cotización guardada correctamente');
               }
             } catch (error) {
-              console.error('Error al guardar cotizaciÃ³n:', error);
+              console.error('Error al guardar cotización:', error);
               
-              // Manejar error de nÃºmero duplicado
+              // Manejar error de número duplicado
               if (error.message && error.message.includes('duplicado')) {
                 const respuesta = confirm(
-                  `âš ï¸ Ya existe una cotizaciÃ³n con el nÃºmero ${cotizacionActual.numero}\n\n` +
-                  `Â¿QuÃ© deseas hacer?\n\n` +
-                  `â€¢ Presiona OK para REEMPLAZAR la cotizaciÃ³n existente\n` +
-                  `â€¢ Presiona Cancelar para GUARDAR COMO NUEVA con el siguiente consecutivo`
+                  `⚠️ Ya existe una cotización con el número ${cotizacionActual.numero}\n\n` +
+                  `¿Qué deseas hacer?\n\n` +
+                  `• Presiona OK para REEMPLAZAR la cotización existente\n` +
+                  `• Presiona Cancelar para GUARDAR COMO NUEVA con el siguiente consecutivo`
                 );
                 
                 if (respuesta) {
-                  // Usuario eligiÃ³ REEMPLAZAR - buscar y actualizar la existente
+                  // Usuario eligió REEMPLAZAR - buscar y actualizar la existente
                   try {
                     const todasCotizaciones = await api.getCotizaciones();
                     const cotizacionExistente = todasCotizaciones.find(c => c.numero === cotizacionActual.numero);
                     
                     if (cotizacionExistente) {
-                      // Actualizar usando el ID de la cotizaciÃ³n existente
+                      // Actualizar usando el ID de la cotización existente
                       await api.updateCotizacion(cotizacionExistente.id, {
                         ...cotizacionActual,
                         id: cotizacionExistente.id
@@ -590,31 +590,31 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
                         c.id === cotizacionExistente.id ? { ...cotizacionActual, id: cotizacionExistente.id } : c
                       ));
                       
-                      alert('âœ… CotizaciÃ³n REEMPLAZADA correctamente');
+                      alert('✅ Cotización REEMPLAZADA correctamente');
                     } else {
-                      alert('âŒ No se pudo encontrar la cotizaciÃ³n para reemplazar');
+                      alert('❌ No se pudo encontrar la cotización para reemplazar');
                     }
                   } catch (updateError) {
                     console.error('Error al reemplazar:', updateError);
-                    alert('âŒ Error al reemplazar la cotizaciÃ³n');
+                    alert('❌ Error al reemplazar la cotización');
                   }
                 } else {
-                  // Usuario eligiÃ³ GUARDAR COMO NUEVA - generar nuevo nÃºmero
+                  // Usuario eligió GUARDAR COMO NUEVA - generar nuevo número
                   const nuevoNumero = await generarNumeroCotizacion();
                   handleChange('numero', nuevoNumero);
                   
-                  // Intentar guardar automÃ¡ticamente con el nuevo nÃºmero
+                  // Intentar guardar automáticamente con el nuevo número
                   try {
                     await api.createCotizacion({ ...cotizacionActual, numero: nuevoNumero });
                     setCotizaciones(prev => [...prev, { ...cotizacionActual, numero: nuevoNumero }]);
-                    alert(`âœ… CotizaciÃ³n guardada como nueva con el nÃºmero ${nuevoNumero}`);
+                    alert(`✅ Cotización guardada como nueva con el número ${nuevoNumero}`);
                   } catch (retryError) {
-                    console.error('Error al guardar con nuevo nÃºmero:', retryError);
-                    alert(`âœï¸ NÃºmero actualizado a ${nuevoNumero}. Por favor presiona Guardar nuevamente.`);
+                    console.error('Error al guardar con nuevo número:', retryError);
+                    alert(`✏️ Número actualizado a ${nuevoNumero}. Por favor presiona Guardar nuevamente.`);
                   }
                 }
               } else {
-                alert('âŒ Error al guardar cotizaciÃ³n: ' + (error.message || 'Error desconocido'));
+                alert('❌ Error al guardar cotización: ' + (error.message || 'Error desconocido'));
               }
             }
           };
@@ -625,14 +625,14 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
           };
 
           const eliminarCotizacion = async (id) => {
-            if (confirm('Â¿EstÃ¡s seguro de eliminar esta cotizaciÃ³n?')) {
+            if (confirm('¿Estás seguro de eliminar esta cotización?')) {
               try {
                 await api.deleteCotizacion(id);
                 setCotizaciones(prev => prev.filter(c => c.id !== id));
-                alert('âœ… CotizaciÃ³n eliminada correctamente');
+                alert('✅ Cotización eliminada correctamente');
               } catch (error) {
-                console.error('Error al eliminar cotizaciÃ³n:', error);
-                alert('âŒ Error al eliminar cotizaciÃ³n');
+                console.error('Error al eliminar cotización:', error);
+                alert('❌ Error al eliminar cotización');
               }
             }
           };
@@ -656,7 +656,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
             
-            alert('âœ… Base de datos exportada correctamente');
+            alert('✅ Base de datos exportada correctamente');
           };
 
           const importarBaseDatos = () => {
@@ -673,7 +673,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
                 try {
                   const datos = JSON.parse(event.target.result);
                   
-                  if (confirm('Â¿Deseas REEMPLAZAR toda la base de datos actual o AGREGAR los datos nuevos?\n\nOK = AGREGAR\nCancelar = REEMPLAZAR')) {
+                  if (confirm('¿Deseas REEMPLAZAR toda la base de datos actual o AGREGAR los datos nuevos?\n\nOK = AGREGAR\nCancelar = REEMPLAZAR')) {
                     const clientesNuevos = datos.clientes || [];
                     const cotizacionesNuevas = datos.cotizaciones || [];
                     
@@ -699,16 +699,16 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
                       return unicos;
                     });
                     
-                    alert('âœ… Datos agregados correctamente');
+                    alert('✅ Datos agregados correctamente');
                   } else {
-                    if (confirm('âš ï¸ ADVERTENCIA: Esto eliminarÃ¡ TODOS tus datos actuales. Â¿EstÃ¡s seguro?')) {
+                    if (confirm('⚠️ ADVERTENCIA: Esto eliminará TODOS tus datos actuales. ¿Estás seguro?')) {
                       setClientes(datos.clientes || []);
                       setCotizaciones(datos.cotizaciones || []);
-                      alert('âœ… Base de datos importada correctamente');
+                      alert('✅ Base de datos importada correctamente');
                     }
                   }
                 } catch (error) {
-                  alert('âŒ Error al importar: Archivo invÃ¡lido');
+                  alert('❌ Error al importar: Archivo inválido');
                   console.error(error);
                 }
               };
@@ -719,13 +719,13 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
           };
 
           const limpiarBaseDatos = () => {
-            if (confirm('âš ï¸ Â¿EstÃ¡s seguro de eliminar TODA la base de datos?\n\nEsto borrarÃ¡:\n- Todos los clientes\n- Todas las cotizaciones\n\nEsta acciÃ³n NO se puede deshacer.')) {
-              if (confirm('âš ï¸ ÃšLTIMA ADVERTENCIA: Â¿Realmente deseas eliminar todo?')) {
+            if (confirm('⚠️ ¿Estás seguro de eliminar TODA la base de datos?\n\nEsto borrará:\n- Todos los clientes\n- Todas las cotizaciones\n\nEsta acción NO se puede deshacer.')) {
+              if (confirm('⚠️ ÚLTIMA ADVERTENCIA: ¿Realmente deseas eliminar todo?')) {
                 localStorage.removeItem('vautec_clientes');
                 localStorage.removeItem('vautec_cotizaciones');
                 setClientes([]);
                 setCotizaciones([]);
-                alert('âœ… Base de datos limpiada');
+                alert('✅ Base de datos limpiada');
               }
             }
           };
@@ -739,13 +739,13 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
             const conceptosHTML = cotizacionActual.conceptos.map((concepto, idx) => {
               const subtotal = calcularSubtotalConcepto(concepto);
               const importe = (parseFloat(concepto.precioUnitario.replace(',', '')) * parseFloat(concepto.cantidad)).toFixed(2);
-              // Escapar saltos de lÃ­nea en detalle
-              const detalleEscapado = concepto.detalle ? concepto.detalle : '';
+              // Escapar saltos de línea en detalle
+              const detalleEscapado = concepto.detalle ? concepto.detalle.replace(/\n/g, '<br>') : '';
               return `
                 <tr>
                   <td style="text-align: left; padding: 8px; border: 1px solid #000;">
                     <strong>${concepto.descripcion}</strong>
-                    ${detalleEscapado ? `<br><span style="font-size: 10px; color: #666; white-space: pre-wrap;">${detalleEscapado}</span>` : ''}
+                    ${detalleEscapado ? `<br><span style="font-size: 10px; color: #666;">${detalleEscapado}</span>` : ''}
                   </td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${concepto.precioUnitario} USD</td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">${concepto.cantidad}</td>
@@ -761,7 +761,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CotizaciÃ³n ${cotizacionActual.numero}</title>
+    <title>Cotización ${cotizacionActual.numero}</title>
     <style>
         @page { margin: 2cm; }
         @media print { 
@@ -807,21 +807,21 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
       <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 8px;">
         <img src="data:image/png;base64,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" alt="Logo VAUTEC" style="height: 60px; width: auto; object-fit: contain;" />
         <div>
-          <div class="company-name">VANGUARDIA EN AUTOMATIZACIÃ“N Y</div>
-          <div class="company-tagline">TECNOLOGÃA INDUSTRIAL</div>
+          <div class="company-name">VANGUARDIA EN AUTOMATIZACIÓN Y</div>
+          <div class="company-tagline">TECNOLOGÍA INDUSTRIAL</div>
         </div>
       </div>
       <div class="company-info">
-        Cerro del Tzirate #108, Las amÃ©ricas,<br>
-        QuerÃ©taro, Qro 76121<br>
-        â˜Ž 442-189-1945 âœ‰ contacto@vautec-mx.com<br>
-        ðŸŒ www.vautec-mx.com
+        Cerro del Tzirate #108, Las américas,<br>
+        Querétaro, Qro 76121<br>
+        ☎ 442-189-1945 ✉ contacto@vautec-mx.com<br>
+        🌐 www.vautec-mx.com
       </div>
         </div>
         <div class="header-right">
             <table class="quote-info-table">
-                <tr><td>COTIZACIÃ“N</td><td>${cotizacionActual.numero}</td></tr>
-                <tr><td>REVISIÃ“N</td><td>${cotizacionActual.revision}</td></tr>
+                <tr><td>COTIZACIÓN</td><td>${cotizacionActual.numero}</td></tr>
+                <tr><td>REVISIÓN</td><td>${cotizacionActual.revision}</td></tr>
                 <tr><td>FECHA</td><td>${cotizacionActual.fecha}</td></tr>
             </table>
         </div>
@@ -830,20 +830,20 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
     <div class="section-header">DATOS DE CLIENTE</div>
     <table class="client-table">
         <tr><td colspan="2" style="text-align: center; font-weight: bold;">${cotizacionActual.clienteNombre}</td></tr>
-        <tr><td>DirecciÃ³n</td><td>${cotizacionActual.clienteDireccion}</td></tr>
-        <tr><td>AtenciÃ³n</td><td>${cotizacionActual.clienteAtencion}</td></tr>
-        <tr><td>TelÃ©fono</td><td>${cotizacionActual.clienteTelefono}</td></tr>
-        <tr><td>Correo electrÃ³nico</td><td>${cotizacionActual.clienteEmail}</td></tr>
+        <tr><td>Dirección</td><td>${cotizacionActual.clienteDireccion}</td></tr>
+        <tr><td>Atención</td><td>${cotizacionActual.clienteAtencion}</td></tr>
+        <tr><td>Teléfono</td><td>${cotizacionActual.clienteTelefono}</td></tr>
+        <tr><td>Correo electrónico</td><td>${cotizacionActual.clienteEmail}</td></tr>
     </table>
 
     <div class="section-header">Proyecto</div>
     <div class="project-title">${cotizacionActual.proyectoTitulo}<br>${cotizacionActual.proyectoSubtitulo}</div>
 
-    <div class="section-header">DescripciÃ³n</div>
-    <div class="content-text">${cotizacionActual.descripcionParrafo1}</div>
+    <div class="section-header">Descripción</div>
+    <div class="content-text">${cotizacionActual.descripcionParrafo1.replace(/\n/g, '<br>')}</div>
 
-    <div class="section-header">JustificaciÃ³n</div>
-    <div class="content-text">${cotizacionActual.justificacion}</div>
+    <div class="section-header">Justificación</div>
+    <div class="content-text">${cotizacionActual.justificacion.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Alcances del Proyecto</div>
     <table class="cost-table" style="margin-bottom: 20px;">
@@ -857,7 +857,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
             ${cotizacionActual.alcances.map(a => 
                 '<tr><td style="text-align: left; padding-left: 15px;">' + a.item + '</td>' +
                 '<td style="text-align: center; font-weight: bold; color: ' + (a.incluido ? '#2e7d32' : '#c62828') + ';">' +
-                (a.incluido ? 'âœ“ INCLUIDO' : 'âœ— NO INCLUIDO') + '</td></tr>'
+                (a.incluido ? '✓ INCLUIDO' : '✗ NO INCLUIDO') + '</td></tr>'
             ).join('')}
         </tbody>
     </table>
@@ -892,10 +892,10 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
     </div>
     <div class="note-text">
         ${cotizacionActual.noIncluye.map(item => `*No incluye ${item.toLowerCase()}<br>`).join('')}
-        **En caso de requerir servicios adicionales favor de solicitar cotizaciÃ³n**
+        **En caso de requerir servicios adicionales favor de solicitar cotización**
     </div>
 
-    <div class="section-header">TÃ©rminos y condiciones</div>
+    <div class="section-header">Términos y condiciones</div>
     <div class="content-text">
         a) Para poder entregar en tiempo y forma debemos contar con su orden de compra.
     </div>
@@ -914,7 +914,7 @@ Modifica el contenido actual segÃºn las instrucciones. Responde SOLO con un JS
 ${cotizacionActual.terminosCondiciones}
     </div>
 
-    <div class="highlight-box">**ESTA COTIZACIÃ“N TIENE UNA VIGENCIA DE 15 DÃAS NATURALES**</div>
+    <div class="highlight-box">**ESTA COTIZACIÓN TIENE UNA VIGENCIA DE 15 DÍAS NATURALES**</div>
 
     <div class="footer-url">www.vautec-mx.com</div>
 </body>
@@ -941,12 +941,12 @@ ${cotizacionActual.terminosCondiciones}
             const conceptosHTML = cotizacionActual.conceptos.map((concepto, idx) => {
               const subtotal = calcularSubtotalConcepto(concepto);
               const importe = (parseFloat(concepto.precioUnitario.replace(',', '')) * parseFloat(concepto.cantidad)).toFixed(2);
-              const detalleEscapado = concepto.detalle ? concepto.detalle : '';
+              const detalleEscapado = concepto.detalle ? concepto.detalle.replace(/\n/g, '<br>') : '';
               return `
                 <tr>
                   <td style="text-align: left; padding: 8px; border: 1px solid #000;">
                     <strong>${concepto.descripcion}</strong>
-                    ${detalleEscapado ? `<br><span style="font-size: 10px; color: #666; white-space: pre-wrap;">${detalleEscapado}</span>` : ''}
+                    ${detalleEscapado ? `<br><span style="font-size: 10px; color: #666;">${detalleEscapado}</span>` : ''}
                   </td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">$${concepto.precioUnitario} USD</td>
                   <td style="text-align: center; padding: 8px; border: 1px solid #000;">${concepto.cantidad}</td>
@@ -962,7 +962,7 @@ ${cotizacionActual.terminosCondiciones}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CotizaciÃ³n ${cotizacionActual.numero}</title>
+    <title>Cotización ${cotizacionActual.numero}</title>
     <style>
         @page { margin: 2cm; }
         @media print { 
@@ -1008,21 +1008,21 @@ ${cotizacionActual.terminosCondiciones}
       <div style="display: flex; align-items: center; gap: 18px; margin-bottom: 8px;">
         LOGO_BASE64_PLACEHOLDER
         <div>
-          <div class="company-name">VANGUARDIA EN AUTOMATIZACIÃ“N Y</div>
-          <div class="company-tagline">TECNOLOGÃA INDUSTRIAL</div>
+          <div class="company-name">VANGUARDIA EN AUTOMATIZACIÓN Y</div>
+          <div class="company-tagline">TECNOLOGÍA INDUSTRIAL</div>
         </div>
       </div>
       <div class="company-info">
-        Cerro del Tzirate #108, Las amÃ©ricas,<br>
-        QuerÃ©taro, Qro 76121<br>
-        â˜Ž 442-189-1945 âœ‰ contacto@vautec-mx.com<br>
-        ðŸŒ www.vautec-mx.com
+        Cerro del Tzirate #108, Las américas,<br>
+        Querétaro, Qro 76121<br>
+        ☎ 442-189-1945 ✉ contacto@vautec-mx.com<br>
+        🌐 www.vautec-mx.com
       </div>
         </div>
         <div class="header-right">
             <table class="quote-info-table">
-                <tr><td>COTIZACIÃ“N</td><td>${cotizacionActual.numero}</td></tr>
-                <tr><td>REVISIÃ“N</td><td>${cotizacionActual.revision}</td></tr>
+                <tr><td>COTIZACIÓN</td><td>${cotizacionActual.numero}</td></tr>
+                <tr><td>REVISIÓN</td><td>${cotizacionActual.revision}</td></tr>
                 <tr><td>FECHA</td><td>${cotizacionActual.fecha}</td></tr>
             </table>
         </div>
@@ -1031,20 +1031,20 @@ ${cotizacionActual.terminosCondiciones}
     <div class="section-header">DATOS DE CLIENTE</div>
     <table class="client-table">
         <tr><td colspan="2" style="text-align: center; font-weight: bold;">${cotizacionActual.clienteNombre}</td></tr>
-        <tr><td>DirecciÃ³n</td><td>${cotizacionActual.clienteDireccion}</td></tr>
-        <tr><td>AtenciÃ³n</td><td>${cotizacionActual.clienteAtencion}</td></tr>
-        <tr><td>TelÃ©fono</td><td>${cotizacionActual.clienteTelefono}</td></tr>
-        <tr><td>Correo electrÃ³nico</td><td>${cotizacionActual.clienteEmail}</td></tr>
+        <tr><td>Dirección</td><td>${cotizacionActual.clienteDireccion}</td></tr>
+        <tr><td>Atención</td><td>${cotizacionActual.clienteAtencion}</td></tr>
+        <tr><td>Teléfono</td><td>${cotizacionActual.clienteTelefono}</td></tr>
+        <tr><td>Correo electrónico</td><td>${cotizacionActual.clienteEmail}</td></tr>
     </table>
 
     <div class="section-header">Proyecto</div>
     <div class="project-title">${cotizacionActual.proyectoTitulo}<br>${cotizacionActual.proyectoSubtitulo}</div>
 
-    <div class="section-header">DescripciÃ³n</div>
-    <div class="content-text">${cotizacionActual.descripcionParrafo1}</div>
+    <div class="section-header">Descripción</div>
+    <div class="content-text">${cotizacionActual.descripcionParrafo1.replace(/\n/g, '<br>')}</div>
 
-    <div class="section-header">JustificaciÃ³n</div>
-    <div class="content-text">${cotizacionActual.justificacion}</div>
+    <div class="section-header">Justificación</div>
+    <div class="content-text">${cotizacionActual.justificacion.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Alcances del Proyecto</div>
     <table class="cost-table" style="margin-bottom: 20px;">
@@ -1058,7 +1058,7 @@ ${cotizacionActual.terminosCondiciones}
             ${cotizacionActual.alcances.map(a => 
                 '<tr><td style="text-align: left; padding-left: 15px;">' + a.item + '</td>' +
                 '<td style="text-align: center; font-weight: bold; color: ' + (a.incluido ? '#2e7d32' : '#c62828') + ';">' +
-                (a.incluido ? 'âœ“ INCLUIDO' : 'âœ— NO INCLUIDO') + '</td></tr>'
+                (a.incluido ? '✓ INCLUIDO' : '✗ NO INCLUIDO') + '</td></tr>'
             ).join('')}
         </tbody>
     </table>
@@ -1093,10 +1093,10 @@ ${cotizacionActual.terminosCondiciones}
     </div>
     <div class="note-text">
         ${cotizacionActual.noIncluye.map(item => `*No incluye ${item.toLowerCase()}<br>`).join('')}
-        **En caso de requerir servicios adicionales favor de solicitar cotizaciÃ³n**
+        **En caso de requerir servicios adicionales favor de solicitar cotización**
     </div>
 
-    <div class="section-header">TÃ©rminos y condiciones</div>
+    <div class="section-header">Términos y condiciones</div>
     <div class="content-text">
         a) Para poder entregar en tiempo y forma debemos contar con su orden de compra.
     </div>
@@ -1115,7 +1115,7 @@ ${cotizacionActual.terminosCondiciones}
 ${cotizacionActual.terminosCondiciones}
     </div>
 
-    <div class="highlight-box">**ESTA COTIZACIÃ“N TIENE UNA VIGENCIA DE 15 DÃAS NATURALES**</div>
+    <div class="highlight-box">**ESTA COTIZACIÓN TIENE UNA VIGENCIA DE 15 DÍAS NATURALES**</div>
 
     <div class="footer-url">www.vautec-mx.com</div>
 </body>
@@ -1149,17 +1149,17 @@ ${cotizacionActual.terminosCondiciones}
             const nombreArchivo = `Cotizacion_${cotizacionActual.numero.replace(/[^a-zA-Z0-9]/g, '_')}.html`;
             zip.folder(nombreCarpeta).file(nombreArchivo, finalHtmlContent);
             
-            // Agregar un archivo README con informaciÃ³n
-            const readmeContent = `COTIZACIÃ“N VAUTEC
+            // Agregar un archivo README con información
+            const readmeContent = `COTIZACIÓN VAUTEC
 ==================
 
-NÃºmero de CotizaciÃ³n: ${cotizacionActual.numero}
+Número de Cotización: ${cotizacionActual.numero}
 Cliente: ${cotizacionActual.clienteNombre}
 Proyecto: ${cotizacionActual.proyectoTitulo}
 Fecha: ${cotizacionActual.fecha}
 Total: $${totalGeneral} USD
 
-Este paquete contiene la cotizaciÃ³n en formato HTML.
+Este paquete contiene la cotización en formato HTML.
 Puede abrir el archivo HTML en cualquier navegador web.
 
 Para imprimir a PDF:
@@ -1168,7 +1168,7 @@ Para imprimir a PDF:
 3. Seleccione "Guardar como PDF"
 
 ---
-VAUTEC - Vanguardia en AutomatizaciÃ³n y TecnologÃ­a Industrial
+VAUTEC - Vanguardia en Automatización y Tecnología Industrial
 www.vautec-mx.com
 `;
             
@@ -1186,9 +1186,9 @@ www.vautec-mx.com
               document.body.removeChild(a);
               URL.revokeObjectURL(url);
               
-              alert('âœ… Paquete completo generado correctamente\n\nðŸ“ Carpeta: ' + nombreCarpeta + '\nðŸ“„ Archivo ZIP descargado');
+              alert('✅ Paquete completo generado correctamente\n\n📁 Carpeta: ' + nombreCarpeta + '\n📄 Archivo ZIP descargado');
             } catch (error) {
-              alert('âŒ Error al generar el paquete: ' + error.message);
+              alert('❌ Error al generar el paquete: ' + error.message);
               console.error(error);
             }
           };
@@ -1204,48 +1204,48 @@ www.vautec-mx.com
                     React.createElement('div', { className: "flex items-center justify-between flex-wrap gap-4" },
                       React.createElement('div', null,
                         React.createElement('h1', { className: "text-3xl font-bold mb-2" }, 'Generador de Cotizaciones VAUTEC Pro'),
-                        React.createElement('p', { className: "text-green-100" }, 'Sistema con mÃºltiples conceptos por cotizaciÃ³n')
+                        React.createElement('p', { className: "text-green-100" }, 'Sistema con múltiples conceptos por cotización')
                       ),
                       React.createElement('div', { className: "flex gap-2 flex-wrap" },
                         React.createElement('button', {
                           onClick: () => setShowClienteModal(true),
                           className: "bg-blue-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-blue-700 transition-all shadow-lg"
-                        }, 'ðŸ‘¥ Clientes'),
+                        }, '👥 Clientes'),
                         React.createElement('button', {
                           onClick: () => setShowCotizacionesModal(true),
                           className: "bg-purple-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-purple-700 transition-all shadow-lg"
-                        }, `ðŸ“‹ Cotizaciones (${cotizaciones.length})`),
+                        }, `📋 Cotizaciones (${cotizaciones.length})`),
                         React.createElement('button', {
                           onClick: exportarBaseDatos,
                           className: "bg-orange-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-orange-700 transition-all shadow-lg",
                           title: "Descargar base de datos"
-                        }, 'ðŸ“¥ Exportar BD'),
+                        }, '📥 Exportar BD'),
                         React.createElement('button', {
                           onClick: importarBaseDatos,
                           className: "bg-teal-600 text-white px-4 py-2 rounded-lg font-bold hover:bg-teal-700 transition-all shadow-lg",
                           title: "Cargar base de datos desde archivo"
-                        }, 'ðŸ“¤ Importar BD'),
+                        }, '📤 Importar BD'),
                         React.createElement('button', {
                           onClick: guardarCotizacion,
                           className: "bg-yellow-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-yellow-600 transition-all shadow-lg"
-                        }, 'ðŸ’¾ Guardar'),
+                        }, '💾 Guardar'),
                         React.createElement('button', {
                           onClick: inicializarCotizacionNueva,
                           className: "bg-green-500 text-white px-4 py-2 rounded-lg font-bold hover:bg-green-600 transition-all shadow-lg"
-                        }, 'âž• Nueva'),
+                        }, '➕ Nueva'),
                         React.createElement('button', {
                           onClick: generarPDF,
                           className: "bg-white text-green-700 px-6 py-2 rounded-lg font-bold hover:bg-green-50 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
-                        }, 'ðŸ“„ Generar PDF'),
+                        }, '📄 Generar PDF'),
                         React.createElement('button', {
                           onClick: generarPaqueteCompleto,
                           className: "bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:from-purple-700 hover:to-blue-700 transition-all shadow-lg hover:shadow-xl transform hover:scale-105"
-                        }, 'ðŸ“¦ Paquete Completo')
+                        }, '📦 Paquete Completo')
                       )
                     )
                   ),
                   React.createElement('div', { className: "flex flex-col lg:flex-row" },
-                    // Panel de ediciÃ³n
+                    // Panel de edición
                     React.createElement('div', { className: "lg:w-1/2 p-6 border-r border-gray-200 overflow-y-auto", style: { maxHeight: 'calc(100vh - 200px)' } },
                       // Tabs
                       React.createElement('div', { className: "flex space-x-2 mb-6 overflow-x-auto" },
@@ -1259,19 +1259,19 @@ www.vautec-mx.com
                                 : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                             }`
                           },
-                            tab === 'basicos' ? 'ðŸ“‹ BÃ¡sicos' :
-                            tab === 'cliente' ? 'ðŸ‘¤ Cliente' :
-                            tab === 'proyecto' ? 'ðŸ”§ Proyecto' :
-                            tab === 'costos' ? 'ðŸ’° Costos' : 'ðŸ“œ TÃ©rminos'
+                            tab === 'basicos' ? '📋 Básicos' :
+                            tab === 'cliente' ? '👤 Cliente' :
+                            tab === 'proyecto' ? '🔧 Proyecto' :
+                            tab === 'costos' ? '💰 Costos' : '📜 Términos'
                           )
                         )
                       ),
 
-                      // Contenido de las pestaÃ±as
+                      // Contenido de las pestañas
                       activeTab === 'basicos' && React.createElement('div', { className: "space-y-4" },
-                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'Datos BÃ¡sicos'),
+                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'Datos Básicos'),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'NÃºmero de CotizaciÃ³n'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Número de Cotización'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.numero,
@@ -1281,7 +1281,7 @@ www.vautec-mx.com
                         ),
                         React.createElement('div', { className: "grid grid-cols-2 gap-4" },
                           React.createElement('div', null,
-                            React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'RevisiÃ³n'),
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Revisión'),
                             React.createElement('input', {
                               type: "text",
                               value: cotizacionActual.revision,
@@ -1308,10 +1308,10 @@ www.vautec-mx.com
                           React.createElement('button', {
                             onClick: () => setShowClienteModal(true),
                             className: "px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm"
-                          }, 'ðŸ“‚ Seleccionar')
+                          }, '📂 Seleccionar')
                         ),
                         cotizacionActual.clienteId && React.createElement('div', { className: "bg-blue-50 border border-blue-200 p-3 rounded-lg text-sm" },
-                          'â„¹ï¸ Cliente seleccionado de la base de datos'
+                          'ℹ️ Cliente seleccionado de la base de datos'
                         ),
                         React.createElement('div', null,
                           React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Nombre del Cliente'),
@@ -1323,7 +1323,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'DirecciÃ³n'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Dirección'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.clienteDireccion,
@@ -1332,7 +1332,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'AtenciÃ³n'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Atención'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.clienteAtencion,
@@ -1341,7 +1341,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'TelÃ©fono'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Teléfono'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.clienteTelefono,
@@ -1350,7 +1350,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Correo ElectrÃ³nico'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Correo Electrónico'),
                           React.createElement('input', {
                             type: "email",
                             value: cotizacionActual.clienteEmail,
@@ -1361,9 +1361,9 @@ www.vautec-mx.com
                       ),
 
                       activeTab === 'proyecto' && React.createElement('div', { className: "space-y-4" },
-                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'InformaciÃ³n del Proyecto'),
+                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'Información del Proyecto'),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'TÃ­tulo del Proyecto'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Título del Proyecto'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.proyectoTitulo,
@@ -1372,7 +1372,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'SubtÃ­tulo del Proyecto'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Subtítulo del Proyecto'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.proyectoSubtitulo,
@@ -1382,16 +1382,16 @@ www.vautec-mx.com
                         ),
                         React.createElement('div', null,
                           React.createElement('div', { className: "flex justify-between items-center mb-1" },
-                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'DescripciÃ³n'),
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Descripción'),
                             React.createElement('div', { className: "flex gap-2" },
                               React.createElement('button', {
                                 onClick: () => setShowModalDescripcionIA(true),
                                 className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                              }, 'âœ¨ Generar'),
+                              }, '✨ Generar'),
                               cotizacionActual.descripcionParrafo1 && React.createElement('button', {
                                 onClick: () => setShowModalEditarDescripcionIA(true),
                                 className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
-                              }, 'âœï¸ Editar con IA')
+                              }, '✏️ Editar con IA')
                             )
                           ),
                           React.createElement('textarea', {
@@ -1403,16 +1403,16 @@ www.vautec-mx.com
                         ),
                         React.createElement('div', null,
                           React.createElement('div', { className: "flex justify-between items-center mb-1" },
-                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'JustificaciÃ³n'),
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Justificación'),
                             React.createElement('div', { className: "flex gap-2" },
                               React.createElement('button', {
                                 onClick: () => setShowModalJustificacionIA(true),
                                 className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                              }, 'âœ¨ Generar'),
+                              }, '✨ Generar'),
                               cotizacionActual.justificacion && React.createElement('button', {
                                 onClick: () => setShowModalEditarJustificacionIA(true),
                                 className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
-                              }, 'âœï¸ Editar con IA')
+                              }, '✏️ Editar con IA')
                             )
                           ),
                           React.createElement('textarea', {
@@ -1429,15 +1429,15 @@ www.vautec-mx.com
                               React.createElement('button', {
                                 onClick: () => setShowModalAlcancesIA(true),
                                 className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                              }, 'âœ¨ Generar'),
+                              }, '✨ Generar'),
                               cotizacionActual.alcances.length > 0 && React.createElement('button', {
                                 onClick: () => setShowModalEditarAlcancesIA(true),
                                 className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
-                              }, 'âœï¸ Editar con IA')
+                              }, '✏️ Editar con IA')
                             )
                           ),
                           React.createElement('p', { className: "text-xs text-gray-600 mb-2 italic" }, 
-                            'âœ“ Marca el checkbox para INCLUIDO / Desmarca para NO INCLUIDO'
+                            '✓ Marca el checkbox para INCLUIDO / Desmarca para NO INCLUIDO'
                           ),
                           React.createElement('div', { className: "space-y-2 mb-2 max-h-60 overflow-y-auto border rounded-lg p-3 bg-gray-50" },
                             cotizacionActual.alcances.map((alcance, index) =>
@@ -1465,14 +1465,14 @@ www.vautec-mx.com
                                 }),
                                 React.createElement('span', { 
                                   className: "text-xs px-2 py-1 rounded font-bold " + (alcance.incluido ? "bg-green-100 text-green-700" : "bg-red-100 text-red-700")
-                                }, alcance.incluido ? 'âœ“ INCLUIDO' : 'âœ— NO INCLUIDO'),
+                                }, alcance.incluido ? '✓ INCLUIDO' : '✗ NO INCLUIDO'),
                                 React.createElement('button', {
                                   onClick: () => {
                                     const nuevos = cotizacionActual.alcances.filter((_, i) => i !== index);
                                     handleChange('alcances', nuevos);
                                   },
                                   className: "px-2 py-1 bg-red-500 text-white rounded text-xs"
-                                }, 'âœ•')
+                                }, '✕')
                               )
                             )
                           ),
@@ -1498,25 +1498,25 @@ www.vautec-mx.com
                                 React.createElement('button', {
                                   onClick: () => removeConcepto(index),
                                   className: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
-                                }, 'ðŸ—‘ï¸ Eliminar')
+                                }, '🗑️ Eliminar')
                               ),
                               React.createElement('div', { className: "space-y-3" },
                                 React.createElement('div', null,
-                                  React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'DescripciÃ³n del Concepto *'),
+                                  React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Descripción del Concepto *'),
                                   React.createElement('input', {
                                     type: "text",
                                     value: concepto.descripcion,
                                     onChange: (e) => updateConcepto(index, 'descripcion', e.target.value),
-                                    placeholder: "Ej: OptimizaciÃ³n del sistema de visiÃ³n",
+                                    placeholder: "Ej: Optimización del sistema de visión",
                                     className: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                   })
                                 ),
                                 React.createElement('div', null,
-                                  React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Detalle / EspecificaciÃ³n'),
+                                  React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Detalle / Especificación'),
                                   React.createElement('textarea', {
                                     value: concepto.detalle,
                                     onChange: (e) => updateConcepto(index, 'detalle', e.target.value),
-                                    placeholder: "Ej: Incluye configuraciÃ³n, pruebas y puesta en marcha",
+                                    placeholder: "Ej: Incluye configuración, pruebas y puesta en marcha",
                                     rows: 2,
                                     className: "w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500"
                                   })
@@ -1583,7 +1583,7 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'GarantÃ­a (meses)'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Garantía (meses)'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.garantiaMeses,
@@ -1594,7 +1594,7 @@ www.vautec-mx.com
                       ),
 
                       activeTab === 'terminos' && React.createElement('div', { className: "space-y-4" },
-                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'TÃ©rminos y Condiciones'),
+                        React.createElement('h2', { className: "text-xl font-bold text-gray-800 mb-4" }, 'Términos y Condiciones'),
                         React.createElement('div', null,
                           React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-2" }, 'Lo que Incluye'),
                           cotizacionActual.incluye.map((item, index) =>
@@ -1608,7 +1608,7 @@ www.vautec-mx.com
                               React.createElement('button', {
                                 onClick: () => removeArrayItem('incluye', index),
                                 className: "px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                              }, 'âœ•')
+                              }, '✕')
                             )
                           ),
                           React.createElement('button', {
@@ -1629,7 +1629,7 @@ www.vautec-mx.com
                               React.createElement('button', {
                                 onClick: () => removeArrayItem('noIncluye', index),
                                 className: "px-3 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                              }, 'âœ•')
+                              }, '✕')
                             )
                           ),
                           React.createElement('button', {
@@ -1658,7 +1658,7 @@ www.vautec-mx.com
                           )
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'CondiciÃ³n Pago Final'),
+                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Condición Pago Final'),
                           React.createElement('input', {
                             type: "text",
                             value: cotizacionActual.pagoFinalCondicion,
@@ -1682,26 +1682,26 @@ www.vautec-mx.com
                                 style: { height: '60px', width: 'auto', objectFit: 'contain' }
                               }),
                               React.createElement('div', null,
-                                React.createElement('div', { className: "text-green-600 font-bold" }, 'VANGUARDIA EN AUTOMATIZACIÃ“N Y'),
-                                React.createElement('div', { className: "text-green-600 font-bold" }, 'TECNOLOGÃA INDUSTRIAL')
+                                React.createElement('div', { className: "text-green-600 font-bold" }, 'VANGUARDIA EN AUTOMATIZACIÓN Y'),
+                                React.createElement('div', { className: "text-green-600 font-bold" }, 'TECNOLOGÍA INDUSTRIAL')
                               )
                             ),
                             React.createElement('div', { className: "text-xs text-gray-600 mt-2" },
-                              'Cerro del Tzirate #108, Las amÃ©ricas,',
+                              'Cerro del Tzirate #108, Las américas,',
                               React.createElement('br'),
-                              'QuerÃ©taro, Qro 76121',
+                              'Querétaro, Qro 76121',
                               React.createElement('br'),
-                              'â˜Ž 442-189-1945 âœ‰ contacto@vautec-mx.com'
+                              '☎ 442-189-1945 ✉ contacto@vautec-mx.com'
                             ),
                             React.createElement('div', { className: "text-right" },
                               React.createElement('table', { className: "border border-gray-800 text-xs" },
                                 React.createElement('tbody', null,
                                   React.createElement('tr', null,
-                                    React.createElement('td', { className: "bg-gray-200 px-2 py-1 border border-gray-800 font-bold" }, 'COTIZACIÃ“N'),
+                                    React.createElement('td', { className: "bg-gray-200 px-2 py-1 border border-gray-800 font-bold" }, 'COTIZACIÓN'),
                                     React.createElement('td', { className: "px-2 py-1 border border-gray-800" }, cotizacionActual.numero)
                                   ),
                                   React.createElement('tr', null,
-                                    React.createElement('td', { className: "bg-gray-200 px-2 py-1 border border-gray-800 font-bold" }, 'REVISIÃ“N'),
+                                    React.createElement('td', { className: "bg-gray-200 px-2 py-1 border border-gray-800 font-bold" }, 'REVISIÓN'),
                                     React.createElement('td', { className: "px-2 py-1 border border-gray-800" }, cotizacionActual.revision)
                                   ),
                                   React.createElement('tr', null,
@@ -1720,15 +1720,15 @@ www.vautec-mx.com
                               React.createElement('td', { colSpan: 2, className: "border border-gray-800 p-2 text-center font-bold" }, cotizacionActual.clienteNombre)
                             ),
                             React.createElement('tr', null,
-                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right w-32" }, 'DirecciÃ³n'),
+                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right w-32" }, 'Dirección'),
                               React.createElement('td', { className: "border border-gray-800 p-2" }, cotizacionActual.clienteDireccion)
                             ),
                             React.createElement('tr', null,
-                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right" }, 'AtenciÃ³n'),
+                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right" }, 'Atención'),
                               React.createElement('td', { className: "border border-gray-800 p-2" }, cotizacionActual.clienteAtencion)
                             ),
                             React.createElement('tr', null,
-                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right" }, 'TelÃ©fono'),
+                              React.createElement('td', { className: "bg-gray-100 border border-gray-800 p-2 font-bold text-right" }, 'Teléfono'),
                               React.createElement('td', { className: "border border-gray-800 p-2" }, cotizacionActual.clienteTelefono)
                             ),
                             React.createElement('tr', null,
@@ -1803,13 +1803,13 @@ www.vautec-mx.com
                     onEliminar: eliminarCotizacion
                   }),
                   showModalDescripcionIA && React.createElement(ModalIA, {
-                    titulo: 'Generar DescripciÃ³n con IA',
+                    titulo: 'Generar Descripción con IA',
                     tipo: 'descripcion',
                     onClose: () => setShowModalDescripcionIA(false),
                     onGenerar: generarConIA
                   }),
                   showModalJustificacionIA && React.createElement(ModalIA, {
-                    titulo: 'Generar JustificaciÃ³n con IA',
+                    titulo: 'Generar Justificación con IA',
                     tipo: 'justificacion',
                     onClose: () => setShowModalJustificacionIA(false),
                     onGenerar: generarConIA
@@ -1821,7 +1821,7 @@ www.vautec-mx.com
                     onGenerar: generarConIA
                   }),
                   showModalEditarDescripcionIA && React.createElement(ModalEditarIA, {
-                    titulo: 'Editar DescripciÃ³n con IA',
+                    titulo: 'Editar Descripción con IA',
                     tipo: 'descripcion',
                     contenidoActual: cotizacionActual.descripcionParrafo1,
                     onClose: () => setShowModalEditarDescripcionIA(false),
@@ -1832,7 +1832,7 @@ www.vautec-mx.com
                     }
                   }),
                   showModalEditarJustificacionIA && React.createElement(ModalEditarIA, {
-                    titulo: 'Editar JustificaciÃ³n con IA',
+                    titulo: 'Editar Justificación con IA',
                     tipo: 'justificacion',
                     contenidoActual: cotizacionActual.justificacion,
                     onClose: () => setShowModalEditarJustificacionIA(false),
@@ -1870,10 +1870,10 @@ www.vautec-mx.com
             setGenerando(true);
             try {
               await onGenerar(tipo, prompt);
-              alert('âœ… Contenido generado exitosamente');
+              alert('✅ Contenido generado exitosamente');
               onClose();
             } catch (error) {
-              alert('âŒ Error al generar contenido: ' + error.message);
+              alert('❌ Error al generar contenido: ' + error.message);
             } finally {
               setGenerando(false);
             }
@@ -1882,39 +1882,39 @@ www.vautec-mx.com
           return React.createElement('div', { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" },
             React.createElement('div', { className: "bg-white rounded-lg shadow-2xl max-w-2xl w-full" },
               React.createElement('div', { className: "bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 flex justify-between items-center" },
-                React.createElement('h2', { className: "text-xl font-bold" }, 'âœ¨ ', titulo),
+                React.createElement('h2', { className: "text-xl font-bold" }, '✨ ', titulo),
                 React.createElement('button', {
                   onClick: onClose,
                   disabled: generando,
                   className: "text-2xl hover:text-gray-200 disabled:opacity-50"
-                }, 'Ã—')
+                }, '×')
               ),
               React.createElement('div', { className: "p-6" },
                 React.createElement('div', { className: "mb-4" },
                   React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                    'ðŸ’¡ Escribe tu prompt para ChatGPT:'
+                    '💡 Escribe tu prompt para ChatGPT:'
                   ),
                   React.createElement('textarea', {
                     value: prompt,
                     onChange: (e) => setPrompt(e.target.value),
                     placeholder: tipo === 'descripcion' 
-                      ? 'Ej: Genera una descripciÃ³n tÃ©cnica para un sistema de automatizaciÃ³n de lÃ­nea de producciÃ³n de envases PET, incluyendo PLCs Siemens S7-1500...'
+                      ? 'Ej: Genera una descripción técnica para un sistema de automatización de línea de producción de envases PET, incluyendo PLCs Siemens S7-1500...'
                       : tipo === 'justificacion'
-                      ? 'Ej: Justifica la inversiÃ³n en un sistema SCADA para monitoreo en tiempo real, incluyendo beneficios econÃ³micos y operativos...'
-                      : 'Ej: Genera 15 alcances tÃ©cnicos para un proyecto de automatizaciÃ³n industrial, incluyendo ingenierÃ­a, programaciÃ³n, puesta en marcha...',
+                      ? 'Ej: Justifica la inversión en un sistema SCADA para monitoreo en tiempo real, incluyendo beneficios económicos y operativos...'
+                      : 'Ej: Genera 15 alcances técnicos para un proyecto de automatización industrial, incluyendo ingeniería, programación, puesta en marcha...',
                     rows: 8,
                     disabled: generando,
                     className: "w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 bg-purple-50"
                   })
                 ),
                 React.createElement('div', { className: "bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg mb-4 border border-purple-200" },
-                  React.createElement('p', { className: "text-sm font-semibold text-purple-900 mb-2" }, 'ðŸ¤– Â¿QuÃ© hace la IA?'),
+                  React.createElement('p', { className: "text-sm font-semibold text-purple-900 mb-2" }, '🤖 ¿Qué hace la IA?'),
                   React.createElement('p', { className: "text-sm text-gray-700" },
                     tipo === 'descripcion'
-                      ? 'GenerarÃ¡ una descripciÃ³n tÃ©cnica detallada basada en tu prompt, con arquitectura de sistemas, tecnologÃ­as especÃ­ficas y beneficios esperados.'
+                      ? 'Generará una descripción técnica detallada basada en tu prompt, con arquitectura de sistemas, tecnologías específicas y beneficios esperados.'
                       : tipo === 'justificacion'
-                      ? 'GenerarÃ¡ una justificaciÃ³n tÃ©cnica y econÃ³mica con beneficios medibles, ROI estimado y ventajas competitivas.'
-                      : 'GenerarÃ¡ una lista de alcances tÃ©cnicos especÃ­ficos, marcando cuÃ¡les estÃ¡n incluidos y cuÃ¡les no en el proyecto.'
+                      ? 'Generará una justificación técnica y económica con beneficios medibles, ROI estimado y ventajas competitivas.'
+                      : 'Generará una lista de alcances técnicos específicos, marcando cuáles están incluidos y cuáles no en el proyecto.'
                   )
                 ),
                 React.createElement('div', { className: "flex gap-3" },
@@ -1927,7 +1927,7 @@ www.vautec-mx.com
                     onClick: handleGenerar,
                     disabled: generando || !prompt.trim(),
                     className: "flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
-                  }, generando ? 'â³ Generando...' : 'âœ¨ Generar con IA')
+                  }, generando ? '⏳ Generando...' : '✨ Generar con IA')
                 )
               )
             )
@@ -1985,7 +1985,7 @@ www.vautec-mx.com
               },
                 React.createElement('div', { className: "p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-cyan-500" },
                   React.createElement('h3', { className: "text-2xl font-bold text-white" }, 
-                    'âœï¸ Editar ' + titulo + ' con IA'
+                    '✏️ Editar ' + titulo + ' con IA'
                   ),
                   React.createElement('p', { className: "text-blue-100 mt-2" },
                     'Proporciona instrucciones para modificar el contenido actual'
@@ -1994,7 +1994,7 @@ www.vautec-mx.com
                 React.createElement('div', { className: "p-6 space-y-6" },
                   React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'ðŸ“„ Contenido Actual:'
+                      '📄 Contenido Actual:'
                     ),
                     React.createElement('div', {
                       className: "bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-40 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
@@ -2002,12 +2002,12 @@ www.vautec-mx.com
                   ),
                   React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'âœï¸ Instrucciones de ModificaciÃ³n:'
+                      '✍️ Instrucciones de Modificación:'
                     ),
                     React.createElement('textarea', {
                       value: instrucciones,
                       onChange: function(e) { setInstrucciones(e.target.value); },
-                      placeholder: 'Ejemplo: "Hazlo mÃ¡s tÃ©cnico", "Agrega cifras de ROI", "Elimina la menciÃ³n de PLCs"...',
+                      placeholder: 'Ejemplo: "Hazlo más técnico", "Agrega cifras de ROI", "Elimina la mención de PLCs"...',
                       disabled: editando,
                       className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-32",
                       rows: 4
@@ -2015,7 +2015,7 @@ www.vautec-mx.com
                   ),
                   contenidoModificado && React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'âœ¨ Resultado:'
+                      '✨ Resultado:'
                     ),
                     React.createElement('div', {
                       className: "bg-green-50 border border-green-200 rounded-lg p-4 max-h-60 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
@@ -2023,7 +2023,7 @@ www.vautec-mx.com
                   ),
                   React.createElement('div', { className: "bg-blue-50 border border-blue-200 rounded-lg p-4" },
                     React.createElement('p', { className: "text-sm text-blue-800" },
-                      'ðŸ’¡ La IA modificarÃ¡ el contenido actual segÃºn tus instrucciones. PodrÃ¡s revisar el resultado antes de guardarlo.'
+                      '💡 La IA modificará el contenido actual según tus instrucciones. Podrás revisar el resultado antes de guardarlo.'
                     )
                   ),
                   React.createElement('div', { className: "flex gap-3" },
@@ -2036,12 +2036,12 @@ www.vautec-mx.com
                       ? React.createElement('button', {
                           onClick: handleGuardar,
                           className: "flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold"
-                        }, 'ðŸ’¾ Guardar Cambios')
+                        }, '💾 Guardar Cambios')
                       : React.createElement('button', {
                           onClick: handleEditar,
                           disabled: editando || !instrucciones.trim(),
                           className: "flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
-                        }, editando ? 'â³ Editando...' : 'âœï¸ Editar con IA')
+                        }, editando ? '⏳ Editando...' : '✏️ Editar con IA')
                   )
                 )
               )
@@ -2068,7 +2068,7 @@ www.vautec-mx.com
             var setAlcancesModificados = _useState3[1];
             
             var contenidoActual = alcancesActuales && alcancesActuales.length > 0
-              ? alcancesActuales.map(function(a, i) { return (i + 1) + '. ' + a.texto + ' - ' + (a.incluido ? 'âœ… Incluido' : 'âŒ No incluido'); }).join('\n')
+              ? alcancesActuales.map(function(a, i) { return (i + 1) + '. ' + a.texto + ' - ' + (a.incluido ? '✅ Incluido' : '❌ No incluido'); }).join('\n')
               : 'Sin alcances definidos';
             
             var handleEditar = function() {
@@ -2102,7 +2102,7 @@ www.vautec-mx.com
               },
                 React.createElement('div', { className: "p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-cyan-500" },
                   React.createElement('h3', { className: "text-2xl font-bold text-white" }, 
-                    'âœï¸ Editar ' + titulo + ' con IA'
+                    '✏️ Editar ' + titulo + ' con IA'
                   ),
                   React.createElement('p', { className: "text-blue-100 mt-2" },
                     'Proporciona instrucciones para modificar los alcances actuales'
@@ -2111,7 +2111,7 @@ www.vautec-mx.com
                 React.createElement('div', { className: "p-6 space-y-6" },
                   React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'ðŸ“„ Alcances Actuales:'
+                      '📄 Alcances Actuales:'
                     ),
                     React.createElement('div', {
                       className: "bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-40 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
@@ -2119,12 +2119,12 @@ www.vautec-mx.com
                   ),
                   React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'âœï¸ Instrucciones de ModificaciÃ³n:'
+                      '✍️ Instrucciones de Modificación:'
                     ),
                     React.createElement('textarea', {
                       value: instrucciones,
                       onChange: function(e) { setInstrucciones(e.target.value); },
-                      placeholder: 'Ejemplo: "Agrega 5 alcances mÃ¡s sobre ciberseguridad", "Elimina los relacionados con PLCs", "Marca como no incluidos los de capacitaciÃ³n"...',
+                      placeholder: 'Ejemplo: "Agrega 5 alcances más sobre ciberseguridad", "Elimina los relacionados con PLCs", "Marca como no incluidos los de capacitación"...',
                       disabled: editando,
                       className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-32",
                       rows: 4
@@ -2132,7 +2132,7 @@ www.vautec-mx.com
                   ),
                   alcancesModificados && alcancesModificados.length > 0 && React.createElement('div', {},
                     React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
-                      'âœ¨ Resultado (' + alcancesModificados.length + ' alcances):'
+                      '✨ Resultado (' + alcancesModificados.length + ' alcances):'
                     ),
                     React.createElement('div', {
                       className: "bg-green-50 border border-green-200 rounded-lg p-4 max-h-60 overflow-y-auto space-y-2"
@@ -2145,13 +2145,13 @@ www.vautec-mx.com
                         React.createElement('span', { className: "flex-1" }, alcance.texto),
                         React.createElement('span', { 
                           className: alcance.incluido ? "text-green-600 font-bold" : "text-red-600 font-bold"
-                        }, alcance.incluido ? 'âœ…' : 'âŒ')
+                        }, alcance.incluido ? '✅' : '❌')
                       );
                     }))
                   ),
                   React.createElement('div', { className: "bg-blue-50 border border-blue-200 rounded-lg p-4" },
                     React.createElement('p', { className: "text-sm text-blue-800" },
-                      'ðŸ’¡ La IA modificarÃ¡ los alcances actuales segÃºn tus instrucciones. PodrÃ¡s revisar el resultado antes de guardarlo.'
+                      '💡 La IA modificará los alcances actuales según tus instrucciones. Podrás revisar el resultado antes de guardarlo.'
                     )
                   ),
                   React.createElement('div', { className: "flex gap-3" },
@@ -2164,12 +2164,12 @@ www.vautec-mx.com
                       ? React.createElement('button', {
                           onClick: handleGuardar,
                           className: "flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold"
-                        }, 'ðŸ’¾ Guardar Cambios')
+                        }, '💾 Guardar Cambios')
                       : React.createElement('button', {
                           onClick: handleEditar,
                           disabled: editando || !instrucciones.trim(),
                           className: "flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
-                        }, editando ? 'â³ Editando...' : 'âœï¸ Editar con IA')
+                        }, editando ? '⏳ Editando...' : '✏️ Editar con IA')
                   )
                 )
               )
@@ -2254,8 +2254,8 @@ www.vautec-mx.com
             React.createElement('div', { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" },
               React.createElement('div', { className: "bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" },
                 React.createElement('div', { className: "bg-blue-600 text-white p-4 flex justify-between items-center sticky top-0" },
-                  React.createElement('h2', { className: "text-2xl font-bold" }, 'ðŸ‘¥ Base de Datos de Clientes'),
-                  React.createElement('button', { onClick: onClose, className: "text-2xl hover:text-gray-200" }, 'Ã—')
+                  React.createElement('h2', { className: "text-2xl font-bold" }, '👥 Base de Datos de Clientes'),
+                  React.createElement('button', { onClick: onClose, className: "text-2xl hover:text-gray-200" }, '×')
                 ),
                 React.createElement('div', { className: "p-6" },
                   React.createElement('button', {
@@ -2267,7 +2267,7 @@ www.vautec-mx.com
                       }
                     },
                     className: "mb-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
-                  }, mostrarFormulario ? 'âŒ Cancelar' : 'âž• Agregar Nuevo Cliente'),
+                  }, mostrarFormulario ? '❌ Cancelar' : '➕ Agregar Nuevo Cliente'),
                   mostrarFormulario && React.createElement('form', { onSubmit: handleSubmit, className: "mb-6 p-4 bg-gray-50 rounded-lg space-y-3" },
                     React.createElement('h3', { className: "font-bold text-lg mb-4" }, clienteEditando ? 'Editar Cliente' : 'Nuevo Cliente'),
                     
@@ -2282,7 +2282,7 @@ www.vautec-mx.com
                     
                     React.createElement('input', {
                       type: "text",
-                      placeholder: "DirecciÃ³n *",
+                      placeholder: "Dirección *",
                       value: nuevoCliente.direccion,
                       onChange: (e) => setNuevoCliente({...nuevoCliente, direccion: e.target.value}),
                       required: true,
@@ -2291,7 +2291,7 @@ www.vautec-mx.com
                     
                     React.createElement('input', {
                       type: "text",
-                      placeholder: "AtenciÃ³n (Principal)",
+                      placeholder: "Atención (Principal)",
                       value: nuevoCliente.atencion,
                       onChange: (e) => setNuevoCliente({...nuevoCliente, atencion: e.target.value}),
                       className: "w-full px-4 py-2 border rounded-lg"
@@ -2299,7 +2299,7 @@ www.vautec-mx.com
                     
                     React.createElement('input', {
                       type: "text",
-                      placeholder: "TelÃ©fono",
+                      placeholder: "Teléfono",
                       value: nuevoCliente.telefono,
                       onChange: (e) => setNuevoCliente({...nuevoCliente, telefono: e.target.value}),
                       className: "w-full px-4 py-2 border rounded-lg"
@@ -2315,7 +2315,7 @@ www.vautec-mx.com
 
                     // Contactos adicionales
                     React.createElement('div', { className: "border-t pt-3 mt-4" },
-                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, 'ðŸ‘¥ Contactos Adicionales'),
+                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, '👥 Contactos Adicionales'),
                       React.createElement('div', { className: "flex gap-2 mb-2" },
                         React.createElement('input', {
                           type: "text",
@@ -2334,12 +2334,12 @@ www.vautec-mx.com
                       nuevoCliente.contactos.length > 0 && React.createElement('div', { className: "space-y-1" },
                         nuevoCliente.contactos.map((contacto, idx) =>
                           React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
-                            React.createElement('span', { className: "text-sm" }, 'ðŸ‘¤ ', contacto),
+                            React.createElement('span', { className: "text-sm" }, '👤 ', contacto),
                             React.createElement('button', {
                               type: "button",
                               onClick: () => eliminarContacto(idx),
                               className: "text-red-500 hover:text-red-700 text-sm"
-                            }, 'âœ•')
+                            }, '✕')
                           )
                         )
                       )
@@ -2347,7 +2347,7 @@ www.vautec-mx.com
 
                     // Emails adicionales
                     React.createElement('div', { className: "border-t pt-3 mt-4" },
-                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, 'ðŸ“§ Emails Adicionales'),
+                      React.createElement('label', { className: "font-semibold text-gray-700 block mb-2" }, '📧 Emails Adicionales'),
                       React.createElement('div', { className: "flex gap-2 mb-2" },
                         React.createElement('input', {
                           type: "email",
@@ -2366,19 +2366,19 @@ www.vautec-mx.com
                       nuevoCliente.emails.length > 0 && React.createElement('div', { className: "space-y-1" },
                         nuevoCliente.emails.map((email, idx) =>
                           React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
-                            React.createElement('span', { className: "text-sm" }, 'âœ‰ï¸ ', email),
+                            React.createElement('span', { className: "text-sm" }, '✉️ ', email),
                             React.createElement('button', {
                               type: "button",
                               onClick: () => eliminarEmail(idx),
                               className: "text-red-500 hover:text-red-700 text-sm"
-                            }, 'âœ•')
+                            }, '✕')
                           )
                         )
                       )
                     ),
                     
                     React.createElement('button', { type: "submit", className: "w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mt-4" },
-                      clienteEditando ? 'ðŸ’¾ Actualizar Cliente' : 'âž• Agregar Cliente'
+                      clienteEditando ? '💾 Actualizar Cliente' : '➕ Agregar Cliente'
                     )
                   ),
                   React.createElement('div', { className: "space-y-3" },
@@ -2389,16 +2389,16 @@ www.vautec-mx.com
                             React.createElement('div', { className: "flex justify-between items-start" },
                               React.createElement('div', { className: "flex-1" },
                                 React.createElement('h3', { className: "font-bold text-lg text-gray-800" }, cliente.nombre),
-                                React.createElement('p', { className: "text-sm text-gray-600" }, 'ðŸ“ ', cliente.direccion),
-                                cliente.atencion && React.createElement('p', { className: "text-sm text-gray-600" }, 'ðŸ‘¤ ', cliente.atencion),
-                                cliente.telefono && React.createElement('p', { className: "text-sm text-gray-600" }, 'ðŸ“ž ', cliente.telefono),
-                                cliente.email && React.createElement('p', { className: "text-sm text-gray-600" }, 'âœ‰ï¸ ', cliente.email),
+                                React.createElement('p', { className: "text-sm text-gray-600" }, '📍 ', cliente.direccion),
+                                cliente.atencion && React.createElement('p', { className: "text-sm text-gray-600" }, '👤 ', cliente.atencion),
+                                cliente.telefono && React.createElement('p', { className: "text-sm text-gray-600" }, '📞 ', cliente.telefono),
+                                cliente.email && React.createElement('p', { className: "text-sm text-gray-600" }, '✉️ ', cliente.email),
                                 
                                 // Contactos adicionales
                                 cliente.contactos && cliente.contactos.length > 0 && React.createElement('div', { className: "mt-2 pt-2 border-t" },
                                   React.createElement('p', { className: "text-xs font-semibold text-gray-500 mb-1" }, 'Contactos Adicionales:'),
                                   cliente.contactos.map((contacto, idx) =>
-                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, 'ðŸ‘¤ ', contacto)
+                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, '👤 ', contacto)
                                   )
                                 ),
                                 
@@ -2406,7 +2406,7 @@ www.vautec-mx.com
                                 cliente.emails && cliente.emails.length > 0 && React.createElement('div', { className: "mt-2 pt-2 border-t" },
                                   React.createElement('p', { className: "text-xs font-semibold text-gray-500 mb-1" }, 'Emails Adicionales:'),
                                   cliente.emails.map((email, idx) =>
-                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, 'âœ‰ï¸ ', email)
+                                    React.createElement('p', { key: idx, className: "text-xs text-gray-600" }, '✉️ ', email)
                                   )
                                 )
                               ),
@@ -2417,17 +2417,17 @@ www.vautec-mx.com
                                     onClose();
                                   },
                                   className: "px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700 text-sm"
-                                }, 'âœ“ Seleccionar'),
+                                }, '✓ Seleccionar'),
                                 React.createElement('button', {
                                   onClick: () => iniciarEdicion(cliente),
                                   className: "px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 text-sm"
-                                }, 'âœï¸'),
+                                }, '✏️'),
                                 React.createElement('button', {
                                   onClick: () => {
-                                    if (confirm('Â¿Eliminar este cliente?')) onEliminar(cliente.id);
+                                    if (confirm('¿Eliminar este cliente?')) onEliminar(cliente.id);
                                   },
                                   className: "px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 text-sm"
-                                }, 'ðŸ—‘ï¸')
+                                }, '🗑️')
                               )
                             )
                           )
@@ -2444,14 +2444,14 @@ www.vautec-mx.com
             React.createElement('div', { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" },
               React.createElement('div', { className: "bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto" },
                 React.createElement('div', { className: "bg-purple-600 text-white p-4 flex justify-between items-center sticky top-0" },
-                  React.createElement('h2', { className: "text-2xl font-bold" }, `ðŸ“‹ Cotizaciones Guardadas (${cotizaciones.length})`),
-                  React.createElement('button', { onClick: onClose, className: "text-2xl hover:text-gray-200" }, 'Ã—')
+                  React.createElement('h2', { className: "text-2xl font-bold" }, `📋 Cotizaciones Guardadas (${cotizaciones.length})`),
+                  React.createElement('button', { onClick: onClose, className: "text-2xl hover:text-gray-200" }, '×')
                 ),
                 React.createElement('div', { className: "p-6 space-y-3" },
                   cotizaciones.length === 0 
                     ? React.createElement('p', { className: "text-gray-500 text-center py-8" }, 'No hay cotizaciones guardadas.')
                     : [...cotizaciones].reverse().map(cot => {
-                        // Calcular total para cada cotizaciÃ³n guardada
+                        // Calcular total para cada cotización guardada
                         const totalCot = cot.conceptos ? cot.conceptos.reduce((sum, concepto) => {
                           const precio = parseFloat(concepto.precioUnitario.replace(',', '')) || 0;
                           const cant = parseFloat(concepto.cantidad) || 0;
@@ -2465,11 +2465,11 @@ www.vautec-mx.com
                           React.createElement('div', { className: "flex justify-between items-start" },
                             React.createElement('div', { className: "flex-1" },
                               React.createElement('h3', { className: "font-bold text-lg text-gray-800" }, cot.numero),
-                              React.createElement('p', { className: "text-sm text-gray-600" }, 'ðŸ‘¤ ', cot.clienteNombre),
-                              React.createElement('p', { className: "text-sm text-gray-600" }, 'ðŸ”§ ', cot.proyectoTitulo),
-                              React.createElement('p', { className: "text-sm text-gray-500" }, `ðŸ“… ${cot.fecha} â€¢ Rev. ${cot.revision}`),
+                              React.createElement('p', { className: "text-sm text-gray-600" }, '👤 ', cot.clienteNombre),
+                              React.createElement('p', { className: "text-sm text-gray-600" }, '🔧 ', cot.proyectoTitulo),
+                              React.createElement('p', { className: "text-sm text-gray-500" }, `📅 ${cot.fecha} • Rev. ${cot.revision}`),
                               React.createElement('p', { className: "text-sm font-bold text-green-600" },
-                                `ðŸ’° $${totalCot} USD`
+                                `💰 $${totalCot} USD`
                               ),
                               cot.conceptos && React.createElement('p', { className: "text-xs text-gray-500 mt-1" },
                                 `${cot.conceptos.length} concepto${cot.conceptos.length !== 1 ? 's' : ''}`
@@ -2479,11 +2479,11 @@ www.vautec-mx.com
                               React.createElement('button', {
                                 onClick: () => onCargar(cot),
                                 className: "px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-                              }, 'ðŸ“‚ Abrir'),
+                              }, '📂 Abrir'),
                               React.createElement('button', {
                                 onClick: () => onEliminar(cot.id),
                                 className: "px-3 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-                              }, 'ðŸ—‘ï¸')
+                              }, '🗑️')
                             )
                           )
                         )
@@ -2499,4 +2499,3 @@ www.vautec-mx.com
     </script>
 </body>
 </html>
-
