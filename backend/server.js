@@ -117,6 +117,9 @@ app.get('/api/cotizaciones', async (req, res) => {
 
 // Crear cotización
 app.post('/api/cotizaciones', async (req, res) => {
+  console.log('=== POST /api/cotizaciones ===');
+  console.log('Body completo:', JSON.stringify(req.body, null, 2));
+  
   const {
     id, numero, revision, fecha, clienteId, clienteNombre, clienteDireccion,
     clienteAtencion, clienteTelefono, clienteEmail, proyectoTitulo, proyectoSubtitulo,
@@ -125,6 +128,12 @@ app.post('/api/cotizaciones', async (req, res) => {
     terminosCondiciones
   } = req.body;
 
+  console.log('Campos clave:');
+  console.log('- id:', id, typeof id);
+  console.log('- numero:', numero);
+  console.log('- alcances:', Array.isArray(alcances) ? `Array(${alcances.length})` : typeof alcances);
+  console.log('- conceptos:', Array.isArray(conceptos) ? `Array(${conceptos.length})` : typeof conceptos);
+
   try {
     const result = await pool.query(
       `INSERT INTO cotizaciones (
@@ -132,8 +141,8 @@ app.post('/api/cotizaciones', async (req, res) => {
         cliente_atencion, cliente_telefono, cliente_email, proyecto_titulo, proyecto_subtitulo,
         descripcion_parrafo1, justificacion, alcances, conceptos, tiempo_entrega,
         garantia_meses, incluye, no_incluye, anticipo, pago_final, pago_final_condicion,
-        terminos_condiciones, fecha_modificacion
-      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, NOW())
+        terminos_condiciones, fecha_creacion, fecha_modificacion
+      ) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, NOW(), NOW())
       RETURNING *`,
       [
         id, numero, revision, fecha, clienteId, clienteNombre, clienteDireccion,
@@ -143,10 +152,20 @@ app.post('/api/cotizaciones', async (req, res) => {
         anticipo, pagoFinal, pagoFinalCondicion, terminosCondiciones
       ]
     );
+    console.log('✅ Cotización creada exitosamente, ID:', result.rows[0].id);
     res.status(201).json(result.rows[0]);
   } catch (error) {
-    console.error('Error al crear cotización:', error);
-    res.status(500).json({ error: 'Error al crear cotización' });
+    console.error('❌ Error al crear cotización');
+    console.error('Mensaje:', error.message);
+    console.error('Detail:', error.detail);
+    console.error('Code:', error.code);
+    console.error('Stack:', error.stack);
+    res.status(500).json({ 
+      error: 'Error al crear cotización',
+      message: error.message,
+      detail: error.detail,
+      code: error.code
+    });
   }
 });
 
