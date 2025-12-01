@@ -775,10 +775,10 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
     <div class="project-title">${cotizacionActual.proyectoTitulo}<br>${cotizacionActual.proyectoSubtitulo}</div>
 
     <div class="section-header">Descripción</div>
-    <div class="content-text">${cotizacionActual.descripcionParrafo1}</div>
+    <div class="content-text">${cotizacionActual.descripcionParrafo1.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Justificación</div>
-    <div class="content-text">${cotizacionActual.justificacion}</div>
+    <div class="content-text">${cotizacionActual.justificacion.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Alcances del Proyecto</div>
     <table class="cost-table" style="margin-bottom: 20px;">
@@ -976,10 +976,10 @@ ${cotizacionActual.terminosCondiciones}
     <div class="project-title">${cotizacionActual.proyectoTitulo}<br>${cotizacionActual.proyectoSubtitulo}</div>
 
     <div class="section-header">Descripción</div>
-    <div class="content-text">${cotizacionActual.descripcionParrafo1}</div>
+    <div class="content-text">${cotizacionActual.descripcionParrafo1.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Justificación</div>
-    <div class="content-text">${cotizacionActual.justificacion}</div>
+    <div class="content-text">${cotizacionActual.justificacion.replace(/\n/g, '<br>')}</div>
 
     <div class="section-header">Alcances del Proyecto</div>
     <table class="cost-table" style="margin-bottom: 20px;">
