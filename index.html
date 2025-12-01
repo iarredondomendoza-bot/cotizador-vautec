@@ -197,6 +197,9 @@
           const [showClienteModal, setShowClienteModal] = useState(false);
           const [showCotizacionesModal, setShowCotizacionesModal] = useState(false);
           const [clienteEditando, setClienteEditando] = useState(null);
+          const [showModalDescripcionIA, setShowModalDescripcionIA] = useState(false);
+          const [showModalJustificacionIA, setShowModalJustificacionIA] = useState(false);
+          const [showModalAlcancesIA, setShowModalAlcancesIA] = useState(false);
           
 
           useEffect(() => {
@@ -216,6 +219,33 @@
             cargarDatos();
           }, []);
 
+          const generarConIA = async (tipo, prompt) => {
+            try {
+              const response = await fetch(`${API_BASE_URL}/api/generar-proyecto-completo`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  descripcion: prompt,
+                  cliente: cotizacionActual?.clienteNombre || ''
+                })
+              });
+              if (!response.ok) throw new Error('Error al generar con IA');
+              const resultado = await response.json();
+              
+              if (tipo === 'descripcion') {
+                handleChange('descripcionParrafo1', resultado.descripcion);
+              } else if (tipo === 'justificacion') {
+                handleChange('justificacion', resultado.justificacion);
+              } else if (tipo === 'alcances') {
+                handleChange('alcances', resultado.alcances);
+              }
+              
+              return resultado;
+            } catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+          };
 
 
           const inicializarCotizacionNueva = () => {
@@ -1238,7 +1268,13 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Descripción'),
+                          React.createElement('div', { className: "flex justify-between items-center mb-1" },
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Descripción'),
+                            React.createElement('button', {
+                              onClick: () => setShowModalDescripcionIA(true),
+                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                            }, '✨ Generar con IA')
+                          ),
                           React.createElement('textarea', {
                             value: cotizacionActual.descripcionParrafo1,
                             onChange: (e) => handleChange('descripcionParrafo1', e.target.value),
@@ -1247,7 +1283,13 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Justificación'),
+                          React.createElement('div', { className: "flex justify-between items-center mb-1" },
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Justificación'),
+                            React.createElement('button', {
+                              onClick: () => setShowModalJustificacionIA(true),
+                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                            }, '✨ Generar con IA')
+                          ),
                           React.createElement('textarea', {
                             value: cotizacionActual.justificacion,
                             onChange: (e) => handleChange('justificacion', e.target.value),
@@ -1256,7 +1298,13 @@ www.vautec-mx.com
                           })
                         ),
                         React.createElement('div', null,
-                          React.createElement('label', { className: "block text-sm font-medium text-gray-700 mb-1" }, 'Tabla de Alcances'),
+                          React.createElement('div', { className: "flex justify-between items-center mb-1" },
+                            React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Tabla de Alcances'),
+                            React.createElement('button', {
+                              onClick: () => setShowModalAlcancesIA(true),
+                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                            }, '✨ Generar con IA')
+                          ),
                           React.createElement('p', { className: "text-xs text-gray-600 mb-2 italic" }, 
                             '✓ Marca el checkbox para INCLUIDO / Desmarca para NO INCLUIDO'
                           ),
@@ -1622,7 +1670,103 @@ www.vautec-mx.com
                     onClose: () => setShowCotizacionesModal(false),
                     onCargar: cargarCotizacion,
                     onEliminar: eliminarCotizacion
+                  }),
+                  showModalDescripcionIA && React.createElement(ModalIA, {
+                    titulo: 'Generar Descripción con IA',
+                    tipo: 'descripcion',
+                    onClose: () => setShowModalDescripcionIA(false),
+                    onGenerar: generarConIA
+                  }),
+                  showModalJustificacionIA && React.createElement(ModalIA, {
+                    titulo: 'Generar Justificación con IA',
+                    tipo: 'justificacion',
+                    onClose: () => setShowModalJustificacionIA(false),
+                    onGenerar: generarConIA
+                  }),
+                  showModalAlcancesIA && React.createElement(ModalIA, {
+                    titulo: 'Generar Alcances con IA',
+                    tipo: 'alcances',
+                    onClose: () => setShowModalAlcancesIA(false),
+                    onGenerar: generarConIA
                   })
+                )
+              )
+            )
+          );
+        }
+
+        function ModalIA({ titulo, tipo, onClose, onGenerar }) {
+          const [prompt, setPrompt] = useState('');
+          const [generando, setGenerando] = useState(false);
+
+          const handleGenerar = async () => {
+            if (!prompt.trim()) {
+              alert('Por favor escribe un prompt');
+              return;
+            }
+            setGenerando(true);
+            try {
+              await onGenerar(tipo, prompt);
+              alert('✅ Contenido generado exitosamente');
+              onClose();
+            } catch (error) {
+              alert('❌ Error al generar contenido: ' + error.message);
+            } finally {
+              setGenerando(false);
+            }
+          };
+
+          return (
+            React.createElement('div', { className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4" },
+              React.createElement('div', { className: "bg-white rounded-lg shadow-2xl max-w-2xl w-full" },
+                React.createElement('div', { className: "bg-gradient-to-r from-purple-600 to-pink-600 text-white p-6 flex justify-between items-center" },
+                  React.createElement('h2', { className: "text-xl font-bold" }, '✨ ', titulo),
+                  React.createElement('button', {
+                    onClick: onClose,
+                    disabled: generando,
+                    className: "text-2xl hover:text-gray-200 disabled:opacity-50"
+                  }, '×')
+                ),
+                React.createElement('div', { className: "p-6" },
+                  React.createElement('div', { className: "mb-4" },
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '💡 Escribe tu prompt para ChatGPT:'
+                    ),
+                    React.createElement('textarea', {
+                      value: prompt,
+                      onChange: (e) => setPrompt(e.target.value),
+                      placeholder: tipo === 'descripcion' 
+                        ? 'Ej: Genera una descripción técnica para un sistema de automatización de línea de producción de envases PET, incluyendo PLCs Siemens S7-1500...'
+                        : tipo === 'justificacion'
+                        ? 'Ej: Justifica la inversión en un sistema SCADA para monitoreo en tiempo real, incluyendo beneficios económicos y operativos...'
+                        : 'Ej: Genera 15 alcances técnicos para un proyecto de automatización industrial, incluyendo ingeniería, programación, puesta en marcha...',
+                      rows: 8,
+                      disabled: generando,
+                      className: "w-full px-4 py-3 border-2 border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent disabled:opacity-50 bg-purple-50"
+                    })
+                  ),
+                  React.createElement('div', { className: "bg-gradient-to-r from-purple-50 to-pink-50 p-4 rounded-lg mb-4 border border-purple-200" },
+                    React.createElement('p', { className: "text-sm font-semibold text-purple-900 mb-2" }, '🤖 ¿Qué hace la IA?'),
+                    React.createElement('p', { className: "text-sm text-gray-700" },
+                      tipo === 'descripcion'
+                        ? 'Generará una descripción técnica detallada basada en tu prompt, con arquitectura de sistemas, tecnologías específicas y beneficios esperados.'
+                        : tipo === 'justificacion'
+                        ? 'Generará una justificación técnica y económica con beneficios medibles, ROI estimado y ventajas competitivas.'
+                        : 'Generará una lista de alcances técnicos específicos, marcando cuáles están incluidos y cuáles no en el proyecto.'
+                    )
+                  ),
+                  React.createElement('div', { className: "flex gap-3" },
+                    React.createElement('button', {
+                      onClick: onClose,
+                      disabled: generando,
+                      className: "flex-1 px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }, 'Cancelar'),
+                    React.createElement('button', {
+                      onClick: handleGenerar,
+                      disabled: generando || !prompt.trim(),
+                      className: "flex-1 px-4 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-lg hover:from-purple-700 hover:to-pink-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
+                    }, generando ? '⏳ Generando...' : '✨ Generar con IA')
+                  )
                 )
               )
             )
