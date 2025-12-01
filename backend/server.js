@@ -135,6 +135,21 @@ app.post('/api/cotizaciones', async (req, res) => {
   console.log('- conceptos:', Array.isArray(conceptos) ? `Array(${conceptos.length})` : typeof conceptos);
 
   try {
+    // Verificar si el número ya existe
+    const existente = await pool.query(
+      'SELECT id FROM cotizaciones WHERE numero = $1',
+      [numero]
+    );
+
+    if (existente.rows.length > 0) {
+      console.log('⚠️ Número de cotización duplicado:', numero);
+      return res.status(409).json({ 
+        error: 'Número de cotización duplicado',
+        message: `El número ${numero} ya existe. Por favor genera un nuevo número.`,
+        code: 'DUPLICATE_NUMERO'
+      });
+    }
+
     const result = await pool.query(
       `INSERT INTO cotizaciones (
         id, numero, revision, fecha, cliente_id, cliente_nombre, cliente_direccion,

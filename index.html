@@ -217,23 +217,25 @@
               } catch (error) {
                 console.error('Error al cargar datos:', error);
               }
-              inicializarCotizacionNueva();
+              await inicializarCotizacionNueva();
             };
             cargarDatos();
           }, []);
 
 
 
-          const inicializarCotizacionNueva = () => {
+          const inicializarCotizacionNueva = async () => {
             const fecha = new Date();
             const dia = String(fecha.getDate()).padStart(2, '0');
             const meses = ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'];
             const mes = meses[fecha.getMonth()];
             const año = String(fecha.getFullYear()).slice(-2);
             
+            const numeroGenerado = await generarNumeroCotizacion();
+            
             const nuevaCotizacion = {
               id: Date.now(),
-              numero: generarNumeroCotizacion(),
+              numero: numeroGenerado,
               revision: '1.0',
               fecha: `${dia}-${mes}-${año}`,
               clienteId: null,
@@ -312,18 +314,27 @@ La venta de productos y servicios quedará sujeta a los términos y condiciones 
             setCotizacionActual(nuevaCotizacion);
           };
 
-          const generarNumeroCotizacion = () => {
+          const generarNumeroCotizacion = async () => {
             const año = new Date().getFullYear().toString().slice(-2);
             const mes = String(new Date().getMonth() + 1).padStart(2, '0');
             const mesActual = `${año}${mes}`;
             
-            const cotizacionesDelMes = cotizaciones.filter(cot => {
-              const numeroCot = cot.numero || '';
-              return numeroCot.includes(`VAUTEC-${mesActual}-`);
-            });
-            
-            const consecutivo = String(cotizacionesDelMes.length + 1).padStart(2, '0');
-            return `VAUTEC-${mesActual}-${consecutivo}`;
+            try {
+              // Obtener todas las cotizaciones del mes desde el servidor
+              const todasLasCotizaciones = await api.getCotizaciones();
+              const cotizacionesDelMes = todasLasCotizaciones.filter(cot => {
+                const numeroCot = cot.numero || '';
+                return numeroCot.includes(`VAUTEC-${mesActual}-`);
+              });
+              
+              const consecutivo = String(cotizacionesDelMes.length + 1).padStart(2, '0');
+              return `VAUTEC-${mesActual}-${consecutivo}`;
+            } catch (error) {
+              console.error('Error al generar número:', error);
+              // Fallback: usar timestamp
+              const timestamp = Date.now().toString().slice(-4);
+              return `VAUTEC-${mesActual}-${timestamp}`;
+            }
           };
 
           const handleChange = (field, value) => {
@@ -550,7 +561,19 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
               }
             } catch (error) {
               console.error('Error al guardar cotización:', error);
-              alert('❌ Error al guardar cotización');
+              
+              // Manejar error de número duplicado
+              if (error.message && error.message.includes('duplicado')) {
+                const nuevoNumero = await generarNumeroCotizacion();
+                if (confirm(`❌ El número ${cotizacionActual.numero} ya existe.\n\n¿Deseas usar el número ${nuevoNumero} en su lugar?`)) {
+                  handleChange('numero', nuevoNumero);
+                  alert('✏️ Número actualizado. Por favor intenta guardar nuevamente.');
+                } else {
+                  alert('⚠️ Por favor cambia el número de cotización manualmente e intenta de nuevo.');
+                }
+              } else {
+                alert('❌ Error al guardar cotización: ' + (error.message || 'Error desconocido'));
+              }
             }
           };
 
