@@ -226,7 +226,7 @@
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ 
                   descripcion: prompt,
-                  cliente: cotizacionActual?.clienteNombre || ''
+                  cliente: cotizacionActual ? cotizacionActual.clienteNombre : ''
                 })
               });
               if (!response.ok) throw new Error('Error al generar con IA');
