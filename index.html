@@ -200,6 +200,9 @@
           const [showModalDescripcionIA, setShowModalDescripcionIA] = useState(false);
           const [showModalJustificacionIA, setShowModalJustificacionIA] = useState(false);
           const [showModalAlcancesIA, setShowModalAlcancesIA] = useState(false);
+          const [showModalEditarDescripcionIA, setShowModalEditarDescripcionIA] = useState(false);
+          const [showModalEditarJustificacionIA, setShowModalEditarJustificacionIA] = useState(false);
+          const [showModalEditarAlcancesIA, setShowModalEditarAlcancesIA] = useState(false);
           
 
           useEffect(() => {
@@ -356,6 +359,49 @@ La venta de productos y servicios quedará sujeta a los términos y condiciones 
               }
               
               return resultado;
+            } catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+          };
+
+          const editarConIA = async (tipo, prompt, contenidoActual) => {
+            try {
+              const promptCompleto = `Contenido actual:
+${contenidoActual}
+
+Instrucciones de modificación:
+${prompt}
+
+Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON:
+{
+  "contenido": "contenido modificado aquí"
+}`;
+
+              const response = await fetch(`${API_BASE_URL}/api/generar-proyecto-completo`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  descripcion: promptCompleto,
+                  cliente: cotizacionActual ? cotizacionActual.clienteNombre : ''
+                })
+              });
+              if (!response.ok) throw new Error('Error al editar con IA');
+              const resultado = await response.json();
+              
+              // Extraer el contenido modificado
+              let contenidoModificado = '';
+              if (resultado.contenido) {
+                contenidoModificado = resultado.contenido;
+              } else if (tipo === 'descripcion') {
+                contenidoModificado = resultado.descripcion;
+              } else if (tipo === 'justificacion') {
+                contenidoModificado = resultado.justificacion;
+              } else if (tipo === 'alcances') {
+                return resultado.alcances;
+              }
+              
+              return contenidoModificado;
             } catch (error) {
               console.error('Error:', error);
               throw error;
@@ -1272,10 +1318,16 @@ www.vautec-mx.com
                         React.createElement('div', null,
                           React.createElement('div', { className: "flex justify-between items-center mb-1" },
                             React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Descripción'),
-                            React.createElement('button', {
-                              onClick: () => setShowModalDescripcionIA(true),
-                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                            }, '✨ Generar con IA')
+                            React.createElement('div', { className: "flex gap-2" },
+                              React.createElement('button', {
+                                onClick: () => setShowModalDescripcionIA(true),
+                                className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                              }, '✨ Generar'),
+                              cotizacionActual.descripcionParrafo1 && React.createElement('button', {
+                                onClick: () => setShowModalEditarDescripcionIA(true),
+                                className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                              }, '✏️ Editar con IA')
+                            )
                           ),
                           React.createElement('textarea', {
                             value: cotizacionActual.descripcionParrafo1,
@@ -1287,10 +1339,16 @@ www.vautec-mx.com
                         React.createElement('div', null,
                           React.createElement('div', { className: "flex justify-between items-center mb-1" },
                             React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Justificación'),
-                            React.createElement('button', {
-                              onClick: () => setShowModalJustificacionIA(true),
-                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                            }, '✨ Generar con IA')
+                            React.createElement('div', { className: "flex gap-2" },
+                              React.createElement('button', {
+                                onClick: () => setShowModalJustificacionIA(true),
+                                className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                              }, '✨ Generar'),
+                              cotizacionActual.justificacion && React.createElement('button', {
+                                onClick: () => setShowModalEditarJustificacionIA(true),
+                                className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                              }, '✏️ Editar con IA')
+                            )
                           ),
                           React.createElement('textarea', {
                             value: cotizacionActual.justificacion,
@@ -1302,10 +1360,16 @@ www.vautec-mx.com
                         React.createElement('div', null,
                           React.createElement('div', { className: "flex justify-between items-center mb-1" },
                             React.createElement('label', { className: "block text-sm font-medium text-gray-700" }, 'Tabla de Alcances'),
-                            React.createElement('button', {
-                              onClick: () => setShowModalAlcancesIA(true),
-                              className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
-                            }, '✨ Generar con IA')
+                            React.createElement('div', { className: "flex gap-2" },
+                              React.createElement('button', {
+                                onClick: () => setShowModalAlcancesIA(true),
+                                className: "px-3 py-1 bg-purple-600 text-white text-xs rounded hover:bg-purple-700 transition-colors"
+                              }, '✨ Generar'),
+                              cotizacionActual.alcances.length > 0 && React.createElement('button', {
+                                onClick: () => setShowModalEditarAlcancesIA(true),
+                                className: "px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700 transition-colors"
+                              }, '✏️ Editar con IA')
+                            )
                           ),
                           React.createElement('p', { className: "text-xs text-gray-600 mb-2 italic" }, 
                             '✓ Marca el checkbox para INCLUIDO / Desmarca para NO INCLUIDO'
@@ -1690,6 +1754,38 @@ www.vautec-mx.com
                     tipo: 'alcances',
                     onClose: () => setShowModalAlcancesIA(false),
                     onGenerar: generarConIA
+                  }),
+                  showModalEditarDescripcionIA && React.createElement(ModalEditarIA, {
+                    titulo: 'Editar Descripción con IA',
+                    tipo: 'descripcion',
+                    contenidoActual: cotizacionActual.descripcionParrafo1,
+                    onClose: () => setShowModalEditarDescripcionIA(false),
+                    onEditar: editarConIA,
+                    onGuardar: (nuevoContenido) => {
+                      handleChange('descripcionParrafo1', nuevoContenido);
+                      setShowModalEditarDescripcionIA(false);
+                    }
+                  }),
+                  showModalEditarJustificacionIA && React.createElement(ModalEditarIA, {
+                    titulo: 'Editar Justificación con IA',
+                    tipo: 'justificacion',
+                    contenidoActual: cotizacionActual.justificacion,
+                    onClose: () => setShowModalEditarJustificacionIA(false),
+                    onEditar: editarConIA,
+                    onGuardar: (nuevoContenido) => {
+                      handleChange('justificacion', nuevoContenido);
+                      setShowModalEditarJustificacionIA(false);
+                    }
+                  }),
+                  showModalEditarAlcancesIA && React.createElement(ModalEditarAlcancesIA, {
+                    titulo: 'Editar Alcances con IA',
+                    alcancesActuales: cotizacionActual.alcances,
+                    onClose: () => setShowModalEditarAlcancesIA(false),
+                    onEditar: editarConIA,
+                    onGuardar: (nuevosAlcances) => {
+                      handleChange('alcances', nuevosAlcances);
+                      setShowModalEditarAlcancesIA(false);
+                    }
                   })
                 )
               )
@@ -1771,7 +1867,250 @@ www.vautec-mx.com
                   )
                 )
               )
-            )
+            );
+          }
+
+          function ModalEditarIA(props) {
+            var titulo = props.titulo;
+            var tipo = props.tipo;
+            var contenidoActual = props.contenidoActual;
+            var onClose = props.onClose;
+            var onEditar = props.onEditar;
+            var onGuardar = props.onGuardar;
+            
+            var _useState = React.useState('');
+            var instrucciones = _useState[0];
+            var setInstrucciones = _useState[1];
+            
+            var _useState2 = React.useState(false);
+            var editando = _useState2[0];
+            var setEditando = _useState2[1];
+            
+            var _useState3 = React.useState(null);
+            var contenidoModificado = _useState3[0];
+            var setContenidoModificado = _useState3[1];
+            
+            var handleEditar = function() {
+              setEditando(true);
+              setContenidoModificado(null);
+              
+              onEditar(tipo, instrucciones, contenidoActual).then(function(contenidoNuevo) {
+                setContenidoModificado(contenidoNuevo);
+                setEditando(false);
+              }).catch(function(error) {
+                console.error('Error al editar con IA:', error);
+                alert('Error al editar el contenido. Por favor intenta de nuevo.');
+                setEditando(false);
+              });
+            };
+            
+            var handleGuardar = function() {
+              if (contenidoModificado) {
+                onGuardar(contenidoModificado);
+                onClose();
+              }
+            };
+            
+            return React.createElement('div', {
+              className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4",
+              onClick: onClose
+            },
+              React.createElement('div', {
+                className: "bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl",
+                onClick: function(e) { e.stopPropagation(); }
+              },
+                React.createElement('div', { className: "p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-cyan-500" },
+                  React.createElement('h3', { className: "text-2xl font-bold text-white" }, 
+                    '✏️ Editar ' + titulo + ' con IA'
+                  ),
+                  React.createElement('p', { className: "text-blue-100 mt-2" },
+                    'Proporciona instrucciones para modificar el contenido actual'
+                  )
+                ),
+                React.createElement('div', { className: "p-6 space-y-6" },
+                  React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '📄 Contenido Actual:'
+                    ),
+                    React.createElement('div', {
+                      className: "bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-40 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
+                    }, contenidoActual || 'Sin contenido')
+                  ),
+                  React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '✍️ Instrucciones de Modificación:'
+                    ),
+                    React.createElement('textarea', {
+                      value: instrucciones,
+                      onChange: function(e) { setInstrucciones(e.target.value); },
+                      placeholder: 'Ejemplo: "Hazlo más técnico", "Agrega cifras de ROI", "Elimina la mención de PLCs"...',
+                      disabled: editando,
+                      className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-32",
+                      rows: 4
+                    })
+                  ),
+                  contenidoModificado && React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '✨ Resultado:'
+                    ),
+                    React.createElement('div', {
+                      className: "bg-green-50 border border-green-200 rounded-lg p-4 max-h-60 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
+                    }, contenidoModificado)
+                  ),
+                  React.createElement('div', { className: "bg-blue-50 border border-blue-200 rounded-lg p-4" },
+                    React.createElement('p', { className: "text-sm text-blue-800" },
+                      '💡 La IA modificará el contenido actual según tus instrucciones. Podrás revisar el resultado antes de guardarlo.'
+                    )
+                  ),
+                  React.createElement('div', { className: "flex gap-3" },
+                    React.createElement('button', {
+                      onClick: onClose,
+                      disabled: editando,
+                      className: "flex-1 px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }, 'Cancelar'),
+                    contenidoModificado 
+                      ? React.createElement('button', {
+                          onClick: handleGuardar,
+                          className: "flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold"
+                        }, '💾 Guardar Cambios')
+                      : React.createElement('button', {
+                          onClick: handleEditar,
+                          disabled: editando || !instrucciones.trim(),
+                          className: "flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
+                        }, editando ? '⏳ Editando...' : '✏️ Editar con IA')
+                  )
+                )
+              )
+            );
+          }
+
+          function ModalEditarAlcancesIA(props) {
+            var titulo = props.titulo;
+            var alcancesActuales = props.alcancesActuales;
+            var onClose = props.onClose;
+            var onEditar = props.onEditar;
+            var onGuardar = props.onGuardar;
+            
+            var _useState = React.useState('');
+            var instrucciones = _useState[0];
+            var setInstrucciones = _useState[1];
+            
+            var _useState2 = React.useState(false);
+            var editando = _useState2[0];
+            var setEditando = _useState2[1];
+            
+            var _useState3 = React.useState(null);
+            var alcancesModificados = _useState3[0];
+            var setAlcancesModificados = _useState3[1];
+            
+            var contenidoActual = alcancesActuales && alcancesActuales.length > 0
+              ? alcancesActuales.map(function(a, i) { return (i + 1) + '. ' + a.texto + ' - ' + (a.incluido ? '✅ Incluido' : '❌ No incluido'); }).join('\n')
+              : 'Sin alcances definidos';
+            
+            var handleEditar = function() {
+              setEditando(true);
+              setAlcancesModificados(null);
+              
+              onEditar('alcances', instrucciones, contenidoActual).then(function(alcancesNuevos) {
+                setAlcancesModificados(alcancesNuevos);
+                setEditando(false);
+              }).catch(function(error) {
+                console.error('Error al editar alcances con IA:', error);
+                alert('Error al editar los alcances. Por favor intenta de nuevo.');
+                setEditando(false);
+              });
+            };
+            
+            var handleGuardar = function() {
+              if (alcancesModificados) {
+                onGuardar(alcancesModificados);
+                onClose();
+              }
+            };
+            
+            return React.createElement('div', {
+              className: "fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4",
+              onClick: onClose
+            },
+              React.createElement('div', {
+                className: "bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl",
+                onClick: function(e) { e.stopPropagation(); }
+              },
+                React.createElement('div', { className: "p-6 border-b border-gray-200 bg-gradient-to-r from-blue-500 to-cyan-500" },
+                  React.createElement('h3', { className: "text-2xl font-bold text-white" }, 
+                    '✏️ Editar ' + titulo + ' con IA'
+                  ),
+                  React.createElement('p', { className: "text-blue-100 mt-2" },
+                    'Proporciona instrucciones para modificar los alcances actuales'
+                  )
+                ),
+                React.createElement('div', { className: "p-6 space-y-6" },
+                  React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '📄 Alcances Actuales:'
+                    ),
+                    React.createElement('div', {
+                      className: "bg-gray-50 border border-gray-200 rounded-lg p-4 max-h-40 overflow-y-auto text-sm text-gray-700 whitespace-pre-wrap"
+                    }, contenidoActual)
+                  ),
+                  React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '✍️ Instrucciones de Modificación:'
+                    ),
+                    React.createElement('textarea', {
+                      value: instrucciones,
+                      onChange: function(e) { setInstrucciones(e.target.value); },
+                      placeholder: 'Ejemplo: "Agrega 5 alcances más sobre ciberseguridad", "Elimina los relacionados con PLCs", "Marca como no incluidos los de capacitación"...',
+                      disabled: editando,
+                      className: "w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all disabled:opacity-50 disabled:cursor-not-allowed min-h-32",
+                      rows: 4
+                    })
+                  ),
+                  alcancesModificados && alcancesModificados.length > 0 && React.createElement('div', {},
+                    React.createElement('label', { className: "block text-sm font-semibold text-gray-700 mb-2" },
+                      '✨ Resultado (' + alcancesModificados.length + ' alcances):'
+                    ),
+                    React.createElement('div', {
+                      className: "bg-green-50 border border-green-200 rounded-lg p-4 max-h-60 overflow-y-auto space-y-2"
+                    }, alcancesModificados.map(function(alcance, index) {
+                      return React.createElement('div', {
+                        key: index,
+                        className: "flex items-start gap-2 text-sm"
+                      },
+                        React.createElement('span', { className: "font-semibold text-gray-600" }, (index + 1) + '.'),
+                        React.createElement('span', { className: "flex-1" }, alcance.texto),
+                        React.createElement('span', { 
+                          className: alcance.incluido ? "text-green-600 font-bold" : "text-red-600 font-bold"
+                        }, alcance.incluido ? '✅' : '❌')
+                      );
+                    }))
+                  ),
+                  React.createElement('div', { className: "bg-blue-50 border border-blue-200 rounded-lg p-4" },
+                    React.createElement('p', { className: "text-sm text-blue-800" },
+                      '💡 La IA modificará los alcances actuales según tus instrucciones. Podrás revisar el resultado antes de guardarlo.'
+                    )
+                  ),
+                  React.createElement('div', { className: "flex gap-3" },
+                    React.createElement('button', {
+                      onClick: onClose,
+                      disabled: editando,
+                      className: "flex-1 px-4 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    }, 'Cancelar'),
+                    alcancesModificados && alcancesModificados.length > 0
+                      ? React.createElement('button', {
+                          onClick: handleGuardar,
+                          className: "flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-bold"
+                        }, '💾 Guardar Cambios')
+                      : React.createElement('button', {
+                          onClick: handleEditar,
+                          disabled: editando || !instrucciones.trim(),
+                          className: "flex-1 px-4 py-3 bg-gradient-to-r from-blue-600 to-cyan-600 text-white rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all shadow-lg disabled:opacity-50 disabled:cursor-not-allowed font-bold"
+                        }, editando ? '⏳ Editando...' : '✏️ Editar con IA')
+                  )
+                )
+              )
+            );
+          }
           );
         }
 
