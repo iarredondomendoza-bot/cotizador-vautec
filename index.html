@@ -885,7 +885,7 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
             ${conceptosHTML}
             <tr class="total-row">
                 <td colspan="5" style="text-align: right; padding-right: 10px;">TOTAL:</td>
-        <td style="text-align: center;">${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
+        <td style="text-align: center;">$${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
       </tr>
       <tr>
         <td colspan="6" style="text-align: right; color: #c62828; font-size: 13px; font-style: italic; padding-top: 8px; border: none;">Los costos no incluyen IVA</td>
@@ -1086,7 +1086,7 @@ ${cotizacionActual.terminosCondiciones}
             ${conceptosHTML}
             <tr class="total-row">
                 <td colspan="5" style="text-align: right; padding-right: 10px;">TOTAL:</td>
-        <td style="text-align: center;">${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
+        <td style="text-align: center;">$${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}</td>
       </tr>
       <tr>
         <td colspan="6" style="text-align: right; color: #c62828; font-size: 13px; font-style: italic; padding-top: 8px; border: none;">Los costos no incluyen IVA</td>
@@ -1164,7 +1164,7 @@ Número de Cotización: ${cotizacionActual.numero}
 Cliente: ${cotizacionActual.clienteNombre}
 Proyecto: ${cotizacionActual.proyectoTitulo}
 Fecha: ${cotizacionActual.fecha}
-Total: ${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}
+Total: $${formatearNumero(totalGeneral)} ${cotizacionActual.moneda}
 
 Este paquete contiene la cotización en formato HTML.
 Puede abrir el archivo HTML en cualquier navegador web.
@@ -2519,5 +2519,7 @@ www.vautec-mx.com
     </script>
 </body>
 </html>
+
+
 
 
