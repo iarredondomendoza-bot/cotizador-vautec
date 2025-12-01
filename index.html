@@ -564,12 +564,54 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
               
               // Manejar error de número duplicado
               if (error.message && error.message.includes('duplicado')) {
-                const nuevoNumero = await generarNumeroCotizacion();
-                if (confirm(`❌ El número ${cotizacionActual.numero} ya existe.\n\n¿Deseas usar el número ${nuevoNumero} en su lugar?`)) {
-                  handleChange('numero', nuevoNumero);
-                  alert('✏️ Número actualizado. Por favor intenta guardar nuevamente.');
+                const respuesta = confirm(
+                  `⚠️ Ya existe una cotización con el número ${cotizacionActual.numero}\n\n` +
+                  `¿Qué deseas hacer?\n\n` +
+                  `• Presiona OK para REEMPLAZAR la cotización existente\n` +
+                  `• Presiona Cancelar para GUARDAR COMO NUEVA con el siguiente consecutivo`
+                );
+                
+                if (respuesta) {
+                  // Usuario eligió REEMPLAZAR - buscar y actualizar la existente
+                  try {
+                    const todasCotizaciones = await api.getCotizaciones();
+                    const cotizacionExistente = todasCotizaciones.find(c => c.numero === cotizacionActual.numero);
+                    
+                    if (cotizacionExistente) {
+                      // Actualizar usando el ID de la cotización existente
+                      await api.updateCotizacion(cotizacionExistente.id, {
+                        ...cotizacionActual,
+                        id: cotizacionExistente.id
+                      });
+                      
+                      // Actualizar el estado local
+                      setCotizacionActual(prev => ({ ...prev, id: cotizacionExistente.id }));
+                      setCotizaciones(prev => prev.map(c => 
+                        c.id === cotizacionExistente.id ? { ...cotizacionActual, id: cotizacionExistente.id } : c
+                      ));
+                      
+                      alert('✅ Cotización REEMPLAZADA correctamente');
+                    } else {
+                      alert('❌ No se pudo encontrar la cotización para reemplazar');
+                    }
+                  } catch (updateError) {
+                    console.error('Error al reemplazar:', updateError);
+                    alert('❌ Error al reemplazar la cotización');
+                  }
                 } else {
-                  alert('⚠️ Por favor cambia el número de cotización manualmente e intenta de nuevo.');
+                  // Usuario eligió GUARDAR COMO NUEVA - generar nuevo número
+                  const nuevoNumero = await generarNumeroCotizacion();
+                  handleChange('numero', nuevoNumero);
+                  
+                  // Intentar guardar automáticamente con el nuevo número
+                  try {
+                    await api.createCotizacion({ ...cotizacionActual, numero: nuevoNumero });
+                    setCotizaciones(prev => [...prev, { ...cotizacionActual, numero: nuevoNumero }]);
+                    alert(`✅ Cotización guardada como nueva con el número ${nuevoNumero}`);
+                  } catch (retryError) {
+                    console.error('Error al guardar con nuevo número:', retryError);
+                    alert(`✏️ Número actualizado a ${nuevoNumero}. Por favor presiona Guardar nuevamente.`);
+                  }
                 }
               } else {
                 alert('❌ Error al guardar cotización: ' + (error.message || 'Error desconocido'));
