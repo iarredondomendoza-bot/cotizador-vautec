@@ -219,33 +219,6 @@
             cargarDatos();
           }, []);
 
-          const generarConIA = async (tipo, prompt) => {
-            try {
-              const response = await fetch(`${API_BASE_URL}/api/generar-proyecto-completo`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                  descripcion: prompt,
-                  cliente: cotizacionActual ? cotizacionActual.clienteNombre : ''
-                })
-              });
-              if (!response.ok) throw new Error('Error al generar con IA');
-              const resultado = await response.json();
-              
-              if (tipo === 'descripcion') {
-                handleChange('descripcionParrafo1', resultado.descripcion);
-              } else if (tipo === 'justificacion') {
-                handleChange('justificacion', resultado.justificacion);
-              } else if (tipo === 'alcances') {
-                handleChange('alcances', resultado.alcances);
-              }
-              
-              return resultado;
-            } catch (error) {
-              console.error('Error:', error);
-              throw error;
-            }
-          };
 
 
           const inicializarCotizacionNueva = () => {
@@ -360,6 +333,35 @@ La venta de productos y servicios quedará sujeta a los términos y condiciones 
               [field]: prev[field].map((item, i) => i === index ? value : item)
             }));
           };
+
+          const generarConIA = async (tipo, prompt) => {
+            try {
+              const response = await fetch(`${API_BASE_URL}/api/generar-proyecto-completo`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                  descripcion: prompt,
+                  cliente: cotizacionActual ? cotizacionActual.clienteNombre : ''
+                })
+              });
+              if (!response.ok) throw new Error('Error al generar con IA');
+              const resultado = await response.json();
+              
+              if (tipo === 'descripcion') {
+                handleChange('descripcionParrafo1', resultado.descripcion);
+              } else if (tipo === 'justificacion') {
+                handleChange('justificacion', resultado.justificacion);
+              } else if (tipo === 'alcances') {
+                handleChange('alcances', resultado.alcances);
+              }
+              
+              return resultado;
+            } catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+          };
+
 
           const addArrayItem = (field) => {
             setCotizacionActual(prev => ({
