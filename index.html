@@ -2214,7 +2214,7 @@ www.vautec-mx.com
             if (nuevoContacto.trim()) {
               setNuevoCliente({
                 ...nuevoCliente,
-                contactos: [...nuevoCliente.contactos, nuevoContacto.trim()]
+                contactos: [...(nuevoCliente.contactos || []), nuevoContacto.trim()]
               });
               setNuevoContacto('');
             }
@@ -2223,7 +2223,7 @@ www.vautec-mx.com
           const eliminarContacto = (index) => {
             setNuevoCliente({
               ...nuevoCliente,
-              contactos: nuevoCliente.contactos.filter((_, i) => i !== index)
+              contactos: (nuevoCliente.contactos || []).filter((_, i) => i !== index)
             });
           };
 
@@ -2231,7 +2231,7 @@ www.vautec-mx.com
             if (nuevoEmail.trim() && nuevoEmail.includes('@')) {
               setNuevoCliente({
                 ...nuevoCliente,
-                emails: [...nuevoCliente.emails, nuevoEmail.trim()]
+                emails: [...(nuevoCliente.emails || []), nuevoEmail.trim()]
               });
               setNuevoEmail('');
             }
@@ -2240,7 +2240,7 @@ www.vautec-mx.com
           const eliminarEmail = (index) => {
             setNuevoCliente({
               ...nuevoCliente,
-              emails: nuevoCliente.emails.filter((_, i) => i !== index)
+              emails: (nuevoCliente.emails || []).filter((_, i) => i !== index)
             });
           };
 
@@ -2351,7 +2351,7 @@ www.vautec-mx.com
                           className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                         }, '+ Agregar')
                       ),
-                      nuevoCliente.contactos.length > 0 && React.createElement('div', { className: "space-y-1" },
+                      (nuevoCliente.contactos && nuevoCliente.contactos.length > 0) && React.createElement('div', { className: "space-y-1" },
                         nuevoCliente.contactos.map((contacto, idx) =>
                           React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
                             React.createElement('span', { className: "text-sm" }, '👤 ', contacto),
@@ -2383,7 +2383,7 @@ www.vautec-mx.com
                           className: "px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                         }, '+ Agregar')
                       ),
-                      nuevoCliente.emails.length > 0 && React.createElement('div', { className: "space-y-1" },
+                      (nuevoCliente.emails && nuevoCliente.emails.length > 0) && React.createElement('div', { className: "space-y-1" },
                         nuevoCliente.emails.map((email, idx) =>
                           React.createElement('div', { key: idx, className: "flex items-center justify-between bg-white p-2 rounded border" },
                             React.createElement('span', { className: "text-sm" }, '✉️ ', email),
