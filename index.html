@@ -493,14 +493,22 @@ Modifica el contenido actual según las instrucciones. Responde SOLO con un JSON
           };
 
           const seleccionarCliente = (cliente) => {
+            // Combinar atención con contactos adicionales separados por /
+            const atencionCompleta = cliente.atencion + 
+              (cliente.contactos && cliente.contactos.length > 0 ? ' / ' + cliente.contactos.join(' / ') : '');
+            
+            // Combinar email con emails adicionales separados por ;
+            const emailCompleto = cliente.email + 
+              (cliente.emails && cliente.emails.length > 0 ? '; ' + cliente.emails.join('; ') : '');
+            
             setCotizacionActual(prev => ({
               ...prev,
               clienteId: cliente.id,
               clienteNombre: cliente.nombre,
               clienteDireccion: cliente.direccion,
-              clienteAtencion: cliente.atencion,
+              clienteAtencion: atencionCompleta,
               clienteTelefono: cliente.telefono,
-              clienteEmail: cliente.email
+              clienteEmail: emailCompleto
             }));
           };
 
