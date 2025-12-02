@@ -104,6 +104,61 @@ app.delete('/api/clientes/:id', async (req, res) => {
 
 // ========== COTIZACIONES ==========
 
+// Endpoint de migración (solo para desarrollo/mantenimiento)
+app.post('/api/migrate', async (req, res) => {
+  try {
+    console.log('🔄 Ejecutando migración de base de datos...');
+    
+    // Verificar si las columnas existen
+    const checkContactos = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name='clientes' AND column_name='contactos'
+    `);
+    
+    const checkEmails = await pool.query(`
+      SELECT column_name 
+      FROM information_schema.columns 
+      WHERE table_name='clientes' AND column_name='emails'
+    `);
+    
+    const results = [];
+    
+    // Agregar columna contactos si no existe
+    if (checkContactos.rows.length === 0) {
+      await pool.query(`
+        ALTER TABLE clientes 
+        ADD COLUMN contactos JSONB DEFAULT '[]'
+      `);
+      results.push('✅ Columna "contactos" agregada');
+    } else {
+      results.push('ℹ️ Columna "contactos" ya existe');
+    }
+    
+    // Agregar columna emails si no existe
+    if (checkEmails.rows.length === 0) {
+      await pool.query(`
+        ALTER TABLE clientes 
+        ADD COLUMN emails JSONB DEFAULT '[]'
+      `);
+      results.push('✅ Columna "emails" agregada');
+    } else {
+      results.push('ℹ️ Columna "emails" ya existe');
+    }
+    
+    // Actualizar registros NULL
+    await pool.query(`UPDATE clientes SET contactos = '[]' WHERE contactos IS NULL`);
+    await pool.query(`UPDATE clientes SET emails = '[]' WHERE emails IS NULL`);
+    results.push('✅ Registros actualizados');
+    
+    console.log('✅ Migración completada');
+    res.json({ success: true, results });
+  } catch (error) {
+    console.error('❌ Error en migración:', error);
+    res.status(500).json({ error: 'Error en migración', details: error.message });
+  }
+});
+
 // Obtener todas las cotizaciones
 app.get('/api/cotizaciones', async (req, res) => {
   try {
